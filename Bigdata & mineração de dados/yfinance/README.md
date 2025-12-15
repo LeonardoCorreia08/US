@@ -1,4 +1,4 @@
-# yFinance
+# Yahoo! Finance's API
 
 Estes arquivos cobrem um espectro completo de análise de mercado, focando especificamente no mercado americano (S&P 500, Nasdaq) e grandes empresas de tecnologia (Big Techs).
 
