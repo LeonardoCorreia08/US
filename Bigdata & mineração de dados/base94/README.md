@@ -1,4 +1,4 @@
-# Banco de dado de 94 a 21 
+# Base de dado de 94 a 21 
 
 
 Aqui está o detalhamento prático da utilidade de cada arquivo CSV que sugeri. Pense neles como "relatórios de inteligência": cada um responde a uma pergunta diferente para um investidor ou cientista de dados.
