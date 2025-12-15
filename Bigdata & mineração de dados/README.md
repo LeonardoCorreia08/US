@@ -1,89 +1,72 @@
 # Projeto de Engenharia de Dados: Construção de um Pipeline de Integração Financeira
 
-
-
 ## Resumo Executivo
 
-Este documento detalha a proposta de um projeto de **Engenharia de Dados** focado na construção de um *pipeline* robusto para a integração e harmonização de dados financeiros provenientes de três fontes primárias: a **Comissão de Valores Mobiliários (CVM)**, o **Yahoo Finance (YFinance)** e a **B3 (Brasil, Bolsa, Balcão)**. O objetivo principal é transformar dados heterogêneos — que variam em granularidade, estrutura e semântica — em um *dataset* analítico unificado, pronto para consumo em aplicações de *Business Intelligence* (BI) e modelos de *Machine Learning* (ML). O projeto é estruturado em fases claras de ingestão, tratamento, harmonização e armazenamento, garantindo a qualidade e a reprodutibilidade da informação.
+Este projeto detalha a construção de um *pipeline* de **Engenharia de Dados** desenhado para integrar e harmonizar dados financeiros de fontes primárias brasileiras: **CVM**, **Yahoo Finance (YFinance)** e uma base histórica da **B3**. O escopo temporal do projeto abrange um período extenso, com dados de mercado desde 2000 e dados contábeis desde 2010, complementados por uma base histórica da B3 de 1994 a 2021. O principal resultado é a criação de uma **Base Financeira Integrada** estruturada em quatro camadas lógicas (Estatística, Contábil, de Mercado e Temporal), que resolve a heterogeneidade de granularidade e semântica. O processo inclui uma rigorosa fase de *profiling* e qualidade, que resultou em um *dataset* com alta integridade, pronto para análises avançadas e modelos de *Machine Learning*.
 
 ## 1. Introdução e Justificativa
 
-A análise de risco e o estudo de desempenho no mercado de capitais brasileiro exigem a combinação de informações de natureza distinta. Dados contábeis, que refletem a saúde estrutural de uma companhia, precisam ser correlacionados com dados de mercado, que capturam o comportamento de preços e a liquidez. A dificuldade reside na **fragmentação e na falta de padronização** dessas fontes.
+A análise financeira robusta exige a combinação de informações de diferentes naturezas. A dificuldade reside na **fragmentação e na disparidade temporal e estrutural** dos dados. O *pipeline* proposto visa criar uma **fonte única de verdade** que combina:
+*   **Fundamentos:** Dados contábeis (CVM) que refletem a saúde estrutural das companhias.
+*   **Comportamento:** Cotações e retornos (YFinance/B3) que capturam a dinâmica de mercado.
 
-O *pipeline* proposto visa resolver a "dor" da integração de dados, criando uma **fonte única de verdade** que combina:
-1.  **Dados Estruturais (CVM):** Informações anuais e trimestrais sobre o balanço patrimonial e demonstrações de resultado.
-2.  **Dados Comportamentais (YFinance/B3):** Cotações diárias, volumes de negociação e indicadores de mercado.
+A construção deste *pipeline* é justificada pela necessidade de um *dataset* limpo e harmonizado que suporte análises complexas, como a correlação entre fundamentos (ROE, Endividamento) e risco de mercado (Volatilidade), sem a necessidade de manipulação manual e propensa a erros.
 
-A construção deste *pipeline* é fundamental para viabilizar análises avançadas, como a avaliação de risco de crédito, a precificação de ativos e a criação de estratégias de investimento baseadas em fundamentos e comportamento de mercado.
+## 2. Cobertura e Escopo dos Dados
 
-## 2. Fontes de Dados e Características
+O projeto abrange uma cobertura histórica significativa, essencial para o treinamento de modelos preditivos e análises de longo prazo.
 
-A tabela a seguir resume as fontes de dados e suas principais características, destacando os desafios de integração.
-
-| Fonte de Dados | Tipo de Informação | Granularidade | Desafio de Integração |
+| Fonte de Dados | Tipo de Informação | Cobertura Temporal | Granularidade |
 | :--- | :--- | :--- | :--- |
-| **CVM (Dados Abertos)** | Demonstrações Financeiras Padronizadas (DFP) e Informações Trimestrais (ITR) [1]. | Anual e Trimestral. | **Padronização Semântica** (diferentes nomenclaturas para o mesmo indicador ao longo do tempo) e **Identificação** (uso do Código CVM). |
-| **Yahoo Finance (YFinance)** | Cotações históricas (abertura, fechamento, máximo, mínimo, volume). | Diária. | **Identificação** (uso de *tickers* que podem variar) e **Qualidade** (dados podem conter falhas ou ajustes). |
-| **B3 (Séries Históricas)** | Dados de negociação detalhados (opcionalmente *trade-a-trade* ou cotações diárias) [2]. | Diária ou *Trade-a-Trade*. | **Volume de Dados** (especialmente em granularidade alta) e **Padronização de Chaves** (uso de códigos de negociação). |
+| **CVM (Dados Abertos)** | Demonstrações Financeiras Padronizadas (DFP) e ITR. | Desde 2010 | Anual e Trimestral |
+| **Yahoo Finance (YFinance)** | Cotações históricas (preços, volume). | Desde 2000 | Diária |
+| **B3 (Base SQL)** | Dados de negociação históricos. | 1994 a 2021 | Diária ou *Trade-a-Trade* |
 
-## 3. Arquitetura do Pipeline de Dados
+## 3. Fase de Ingestão e Qualidade de Dados
 
-O *pipeline* será construído seguindo o modelo ETL (Extract, Transform, Load), com foco na modularidade e na capacidade de reprocessamento.
+A fase inicial de ingestão coleta os dados brutos, que são imediatamente submetidos a um processo de **profiling** para garantir a qualidade antes da transformação.
 
-### 3.1. Fase de Ingestão (Extract)
+> "Antes da integração, foi realizado um profiling completo das bases financeiras, permitindo identificar diferenças de granularidade, chaves heterogêneas e arquivos de natureza estatística, evitando *merges* indevidos."
 
-Esta fase é responsável pela coleta dos dados brutos de cada fonte.
+O resultado do *profiling* inicial confirmou a alta qualidade dos dados brutos e a correta separação dos arquivos:
+*   **Integridade Estrutural:** Foram identificadas **199 combinações arquivo × coluna**, indicando uma estrutura de dados bem separada e organizada.
+*   **Tipagem:** A tipagem dos dados é majoritariamente correta (`float64`, `int64`, `object`), facilitando o processamento.
+*   **Completude:** O *dataset* apresenta **zero nulos relevantes**, um fator excelente para a confiabilidade das análises e para o treinamento de modelos de *Machine Learning*.
 
-| Fonte | Mecanismo de Ingestão | Frequência |
+## 4. Arquitetura da Base Financeira Integrada (4 Camadas)
+
+A Base Financeira Integrada é o produto final do *pipeline* e é organizada em quatro camadas lógicas, cada uma com um propósito analítico distinto. Esta separação garante que os dados sejam usados de forma apropriada, respeitando suas granularidades e funções.
+
+| Camada | Arquivos de Exemplo | Estrutura Lógica | Função Analítica |
+| :--- | :--- | :--- | :--- |
+| **Base Estatística** | `base_estatistica_cvm_macro.csv` | Colunas numéricas puras, chave `referencia`. | **Benchmark Macroeconômico.** Serve como régua de comparação. **Não deve ser usada em *merge* linha a linha** com dados de empresas. |
+| **Base Contábil** | `base_contabil_*` | Chave: `Empresa / ativo, Ano`. | **Nível Micro (Empresa/Ano).** Contém Receita, Lucro, ROE, Endividamento. Separação correta de granularidade em relação à Base Estatística. |
+| **Base de Mercado** | `base_mercado_retornos_diarios.csv` | Formato *Wide* (coluna por ativo), métricas homogêneas. | **Risco e Correlação.** Ideal para calcular Risco Sistêmico, Beta e PCA/Clustering. **Não misturar diretamente com CVM** (dados contábeis). |
+| **Base Temporal** | `base_temporal_*` | Chave: `Data + Ativo`. | **Granularidade Mais Fina.** Contém Preço, Retorno, Indicadores Técnicos (RSI, SMA, Volatilidade). Base ideal para *Trading*, Modelos Preditivos e *Forecast*. |
+
+## 5. Fase de Harmonização e Transformação
+
+A fase de transformação foca em criar as chaves de ligação entre as quatro bases, permitindo que o analista ou o modelo de ML combine as informações conforme a necessidade.
+
+### 5.1. Mapeamento de Chaves e Granularidade
+
+O principal desafio é a unificação de granularidades:
+*   **Contábil (Trimestral/Anual) + Mercado/Temporal (Diário):** A integração é feita replicando os dados contábeis (nível micro) para todos os dias dentro do período de validade da demonstração, usando a chave **Ativo + Data**.
+*   **Estatística (Macro):** Esta base é mantida separada, servindo como uma **tabela de referência** para contextualização, e não para junção direta com as tabelas de empresas.
+
+### 5.2. Produtos Finais do Pipeline
+
+O *pipeline* gera diversos arquivos de saída (CSV) que atendem a diferentes necessidades analíticas, conforme detalhado na análise de uso:
+
+| Objetivo Analítico | Arquivos de Saída (Exemplos) | Uso Prático |
 | :--- | :--- | :--- |
-| **CVM** | Download de arquivos ZIP/CSV do Portal de Dados Abertos [1]. | Trimestral/Anual (ou sob demanda). |
-| **YFinance** | Uso da biblioteca `yfinance` em Python para *scraping* de dados históricos via API. | Diária. |
-| **B3** | Download de arquivos de séries históricas (seja via FTP ou portal web) [2]. | Diária. |
+| **Seleção de Carteira** | `ranking_performance.csv`, `clusters_acoes.csv` | Filtrar ativos por Retorno/Risco, montar carteiras diversificadas por cluster. |
+| **Timing e Trading** | `indicadores_tecnicos_completo.csv`, `backtest_estrategia_mm.csv` | Alimentar robôs de *trade*, validar estratégias de média móvel, identificar pontos de entrada. |
+| **Segurança e Risco** | `2_risco_atr.csv`, `anomalias_volume.csv` | Calcular *Stop Loss* (via ATR), investigar eventos de *Insider/News* (via anomalias de volume). |
 
-Os dados brutos são armazenados em uma **Camada *Landing*** (ou *Raw Data*), mantendo o formato original para garantir a rastreabilidade.
+## 6. Conclusão
 
-### 3.2. Fase de Tratamento e Transformação (Transform)
-
-Esta é a fase mais crítica, onde a heterogeneidade é resolvida.
-
-#### 3.2.1. Padronização de Chaves
-
-O principal desafio é unificar as entidades. Será criado um **Mapeamento de Entidades** que correlaciona o **Código CVM** (fonte primária de identificação) com o **Ticker de Negociação** (usado em YFinance e B3).
-
-#### 3.2.2. Tratamento de Dados Contábeis (CVM)
-
-*   **Limpeza:** Remoção de registros duplicados e tratamento de valores nulos.
-*   **Harmonização Semântica:** Criação de um dicionário de dados para padronizar as contas contábeis (e.g., mapear diferentes códigos de "Patrimônio Líquido" para uma única coluna `Patrimonio_Liquido`).
-*   **Cálculo de Indicadores:** Derivação de métricas financeiras (ROE, Endividamento, Margens) a partir das contas primárias.
-
-#### 3.2.3. Tratamento de Dados de Mercado (YFinance/B3)
-
-*   **Limpeza:** Tratamento de *outliers* e ajuste de preços para eventos corporativos (splits, grupamentos).
-*   **Cálculo de Risco:** Derivação de métricas de risco (Volatilidade, Retornos Diários) a partir das cotações.
-
-### 3.3. Fase de Harmonização e Integração
-
-Nesta fase, os dados tratados são combinados para formar o *dataset* analítico.
-
-1.  **Criação da Tabela Fato:** Uma tabela central com granularidade diária.
-2.  **Junção (Join):** Os dados de mercado (diários) são unidos aos dados contábeis (trimestrais/anuais) usando a **Data** e o **Identificador Padronizado** como chaves. Os dados contábeis são replicados para todos os dias dentro do período de validade da demonstração.
-3.  **Camada Analítica (*Curated Data*):** O resultado é armazenado em uma camada otimizada para consultas, onde os dados de diferentes fontes coexistem de forma harmonizada.
-
-## 4. Tecnologias Sugeridas
-
-O *pipeline* pode ser implementado utilizando as seguintes tecnologias:
-
-| Componente | Tecnologia Sugerida | Justificativa |
-| :--- | :--- | :--- |
-| **Orquestração** | Apache Airflow ou Prefect | Gerenciamento de dependências, agendamento e monitoramento do fluxo de trabalho. |
-| **Processamento** | Python (Pandas, Dask) | Flexibilidade para manipulação de dados heterogêneos e cálculos complexos. |
-| **Armazenamento** | PostgreSQL ou Data Lake (Parquet) | Armazenamento estruturado para a camada analítica e escalabilidade para dados brutos. |
-
-## 5. Conclusão e Próximos Passos
-
-A construção deste *pipeline* de integração de dados financeiros é um projeto de **engenharia de dados** que resolve o problema fundamental da heterogeneidade das fontes CVM, YFinance e B3. O produto final é um *dataset* de alta qualidade, essencial para qualquer iniciativa de análise de risco ou modelagem preditiva no mercado brasileiro.
-
-Os próximos passos incluem a prototipagem da Fase de Ingestão e a validação do Mapeamento de Entidades, garantindo que a chave de unificação seja robusta e abrangente.
+O projeto de *pipeline* demonstra uma abordagem de **engenharia de dados** que transforma a complexidade da integração de dados financeiros heterogêneos (CVM, YFinance, B3) em um ativo estruturado e de alta qualidade. A arquitetura de quatro camadas e a confirmação de integridade dos dados garantem que a **Base Financeira Integrada** seja uma plataforma sólida para qualquer análise de risco, *valuation* ou estratégia de investimento, superando os desafios de granularidade e semântica.
 
 ## Referências
 
