@@ -6,7 +6,7 @@ Este projeto detalha a construção de um *pipeline* de **Engenharia de Dados** 
 
 ## 1. Introdução e Justificativa
 
-A análise financeira robusta exige a combinação de informações de diferentes naturezas. A dificuldade reside na **fragmentação e na disparidade temporal e estrutural** dos dados. O *pipeline* proposto visa criar uma **fonte única de verdade** que combina:
+A análise financeira exige a combinação de informações de diferentes naturezas. A dificuldade reside na **fragmentação e na disparidade temporal e estrutural** dos dados. O *pipeline* proposto visa criar uma **fonte única de verdade** que combina:
 *   **Fundamentos:** Dados contábeis (CVM) que refletem a saúde estrutural das companhias.
 *   **Comportamento:** Cotações e retornos (YFinance/B3) que capturam a dinâmica de mercado.
 
