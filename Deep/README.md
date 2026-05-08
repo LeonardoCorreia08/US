@@ -348,10 +348,8 @@ cd transformadores-deep-learning
 pip install -r requirements.txt
 
 # 3. Execute os notebooks em ordem no Jupyter ou Google Colab
-# notebooks/01_eda.ipynb
-# notebooks/02_autoencoder.ipynb
-# notebooks/03_lstm.ipynb
-# notebooks/04_mlp.ipynb
+Transformadores_Deep_Learning_CRISP_DM.ipynb
+
 ```
 
 ### Script Python (pipeline completo)
