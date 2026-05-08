@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  # Serviço do Dashboard Streamlit
+  dashboard:
+    build: .
+    container_name: ambiental_streamlit
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./data:/app/data
+      - ./mlruns:/app/mlruns
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow_server:5000
+    depends_on:
+      - mlflow_server
+    command: streamlit run app/app.py --server.port=8501 --server.address=0.0.0.0
+
+  # Serviço do Servidor MLflow
+  mlflow_server:
+    image: python:3.11-slim
+    container_name: ambiental_mlflow
+    ports:
+      - "5000:5000"
+    working_dir: /mlflow
+    volumes:
+      - ./mlruns:/mlflow/mlruns
+      - ./mlflow.db:/mlflow/mlflow.db
+    entrypoint: >
+      sh -c "pip install mlflow && 
+             mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns --host 0.0.0.0"

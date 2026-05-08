@@ -1,0 +1,31 @@
+project:
+  name: "Monitoramento de Qualidade Ambiental"
+  version: "1.0.0"
+
+data:
+  raw_path: "data/dataset_ambiental.csv"
+  target: "Qualidade_Ambiental"
+  test_size: 0.2
+  random_state: 42
+
+features:
+  numerical:
+    - "Temperatura"
+    - "Umidade"
+    - "CO2"
+    - "CO"
+    - "Pressao_Atm"
+    - "NO2"
+    - "SO2"
+    - "O3"
+
+mlflow:
+  experiment_name: "Ambiental_Quality_Classification"
+  tracking_uri: "sqlite:///mlflow.db"
+
+optuna:
+  n_trials: 20
+
+paths:
+  models: "models/"
+  reports: "reports/"
