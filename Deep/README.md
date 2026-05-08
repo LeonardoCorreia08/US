@@ -40,10 +40,7 @@ transformadores-deep-learning/
 |   `-- transformer_data.csv          # dataset original (17.348 registros horarios)
 |
 |-- notebooks/
-|   |-- 01_eda.ipynb                  # analise exploratoria de dados
-|   |-- 02_autoencoder.ipynb          # deteccao de anomalias
-|   |-- 03_lstm.ipynb                 # previsao de temperatura
-|   `-- 04_mlp.ipynb                  # classificacao operacional
+|   |-- Transformadores_Deep_Learning_CRISP_DM.ipynb  # notebook 
 |
 |-- transformadores_pipeline.py       # pipeline completo em script unico
 |
