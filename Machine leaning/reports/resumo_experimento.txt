@@ -1,0 +1,37 @@
+=======================================================
+  RESUMO DO EXPERIMENTO — Qualidade Ambiental
+=======================================================
+
+Timestamp    : 20260326_024857
+Run name     : RF_Optuna_20260326_024857
+Features     : ['Temperatura', 'Umidade', 'CO2', 'CO', 'Pressao_Atm', 'NO2', 'SO2', 'O3']
+Classes      : ['Boa', 'Excelente', 'Moderada', 'Muito Ruim', 'Ruim']
+
+MELHORES HIPERPARÂMETROS (Optuna):
+  n_estimators: 550
+  max_depth: 26
+  min_samples_split: 6
+  min_samples_leaf: 3
+  max_features: sqrt
+  class_weight: None
+
+F1-macro CV (Optuna) : 0.9758
+
+MÉTRICAS NO TESTE:
+  accuracy: 0.9255
+  precision_macro: 0.6505
+  recall_macro: 0.6775
+  f1_macro: 0.6623
+
+CLASSIFICATION REPORT:
+              precision    recall  f1-score   support
+
+         Boa       0.90      0.88      0.89       291
+   Excelente       0.00      0.00      0.00         2
+    Moderada       0.95      0.94      0.94      1182
+  Muito Ruim       0.50      0.64      0.56        11
+        Ruim       0.90      0.93      0.92       514
+
+    accuracy                           0.93      2000
+   macro avg       0.65      0.68      0.66      2000
+weighted avg       0.93      0.93      0.93      2000

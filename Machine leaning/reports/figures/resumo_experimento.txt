@@ -1,0 +1,27 @@
+--- Resumo do Experimento ---
+Timestamp: 20260326_014556
+Parâmetros:
+  n_estimators: 267
+  max_depth: 20
+  min_samples_split: 8
+  min_samples_leaf: 2
+  max_features: sqrt
+  class_weight: balanced
+Métricas:
+  accuracy: 0.9255
+  precision_macro: 0.6595
+  recall_macro: 0.6761
+  f1_macro: 0.6669
+
+Relatório de Classificação:
+              precision    recall  f1-score   support
+
+         Boa       0.91      0.88      0.89       291
+   Excelente       0.00      0.00      0.00         2
+    Moderada       0.94      0.94      0.94      1182
+  Muito Ruim       0.54      0.64      0.58        11
+        Ruim       0.90      0.93      0.92       514
+
+    accuracy                           0.93      2000
+   macro avg       0.66      0.68      0.67      2000
+weighted avg       0.93      0.93      0.93      2000
