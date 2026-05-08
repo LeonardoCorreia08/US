@@ -52,6 +52,11 @@ transformadores-deep-learning/
 |   |-- mlp_treinamento.png
 |   |-- mlp_confusao_roc.png
 |   `-- mlp_feature_importance.png
+|   |-- meto.png
+|   |-- anom.png
+|   |-- janela.png
+|   |-- classificacao.png
+|   |-- cobertura.png
 |
 `-- README.md
 ```
