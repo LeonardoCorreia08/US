@@ -152,15 +152,9 @@ O modelo aprende o padrao de operacao normal. Quando um ponto foge desse padrao,
 
 ### Arquitetura
 
-```
-Janela de entrada: 24 horas de historico das 7 features
-        |
-    [ LSTM ]            <- celulas com memoria de longo prazo
-        |
-    [ Dense ]
-        |
-Saida: previsao para t+1h, t+2h, t+3h, t+4h
-```
+
+![Janela](imgs/janela.png)
+
 
 **Divisao temporal dos dados** (ordem preservada — sem embaralhamento):
 
@@ -186,24 +180,9 @@ O erro cresce conforme o horizonte aumenta — comportamento esperado e consiste
 
 ### Arquitetura
 
-```
-[ Entrada: 7 features ]
-        |
-[ Camada Dense + ReLU ]
-        |
-[ Dropout ]             <- regularizacao para evitar overfitting
-        |
-[ Camada Dense + ReLU ]
-        |
-[ Dropout ]
-        |
-[ Saida: Sigmoid ]      <- probabilidade de falha entre 0 e 1
-        |
-threshold ajustado por curva ROC = 0.615
-        |
-probabilidade > 0.615  -->  FALHA
-probabilidade <= 0.615 -->  NORMAL
-```
+
+![classificacao](imgs/classificacao.png)
+
 
 **Estrategias para lidar com o desbalanceamento:**
 - `class_weight`: penaliza erros na classe de falha proporcionalmente ao desbalanceamento
@@ -244,22 +223,9 @@ A temperatura do oleo (`OT`) foi de longe a variavel mais importante, o que e co
 | LSTM | Previsao de temperatura | MAE / RMSE | 0.883 / 1.176 degC |
 | Deep MLP | Classificacao de falhas | AUC-ROC / Recall | 0.9226 / 0.9615 |
 
-```
-Cobertura integrada dos tres modelos
-======================================
 
-  AUTOENCODER            LSTM               DEEP MLP
-  -----------            ----               --------
-  Monitora               Antecipa           Classifica
-  comportamentos         temperatura        estado atual
-  atipicos sem           futura do oleo     (normal/falha)
-  rotulos                                   com threshold ROC
-       |                     |                   |
-       +---------------------+-------------------+
-                             |
-                 Sistema integrado de
-                 manutencao preditiva
-```
+![cobertura](imgs/cobertura.png)
+
 
 ---
 
