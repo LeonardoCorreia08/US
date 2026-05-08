@@ -129,20 +129,7 @@ Foram utilizadas as 7 variaveis numericas do dataset como features: `HUFL`, `HUL
 ### Como funciona
 
 ```
-Entrada (7 features)
-        |
-    [ Encoder ]         <- comprime para representacao latente
-        |
-    representacao latente
-        |
-    [ Decoder ]         <- reconstroi a entrada original
-        |
-    erro de reconstrucao (MSE)
-        |
-    threshold = percentil 99 do erro no treino = 0.0129
-        |
-    erro > 0.0129  -->  ANOMALIA
-    erro <= 0.0129 -->  NORMAL
+![Anomalias](imgs/anom.png)
 ```
 
 O modelo aprende o padrao de operacao normal. Quando um ponto foge desse padrao, o erro de reconstrucao sobe acima do threshold e o ponto e classificado como anomalia.
