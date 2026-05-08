@@ -128,9 +128,9 @@ Foram utilizadas as 7 variaveis numericas do dataset como features: `HUFL`, `HUL
 
 ### Como funciona
 
-```
+
 ![Anomalias](imgs/anom.png)
-```
+
 
 O modelo aprende o padrao de operacao normal. Quando um ponto foge desse padrao, o erro de reconstrucao sobe acima do threshold e o ponto e classificado como anomalia.
 
