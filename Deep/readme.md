@@ -1,4 +1,4 @@
-# Transformadores Eletricos — Deep Learning com CRISP-DM
+****# Transformadores Eletricos — Deep Learning com CRISP-DM
 
 Aplicacao de tecnicas de Deep Learning em dados operacionais de transformadores eletricos para apoiar manutencao preditiva. O projeto cobre tres frentes: deteccao de anomalias, previsao de temperatura do oleo e classificacao do estado operacional.
 
@@ -424,4 +424,4 @@ seaborn >= 0.12
 
 ## Referencia da Metodologia
 
-CRISP-DM: Chapman, P. et al. (2000). *CRISP-DM 1.0: Step-by-step data mining guide*. SPSS Inc.
+CRISP-DM: Chapman, P. et al. (2000). *CRISP-DM 1.0: Step-by-step data mining guide*. SPSS Inc.****
