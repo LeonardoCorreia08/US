@@ -87,9 +87,8 @@ transformadores-deep-learning/
 
 O projeto seguiu as seis etapas do CRISP-DM (Cross-Industry Standard Process for Data Mining):
 
-```
 ![Metodologia CRISP-DM](imgs/meto.png)
-```
+
 
 ---
 
