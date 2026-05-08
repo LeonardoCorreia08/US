@@ -115,9 +115,14 @@ print(f'Seed global: {SEED} resultados reproduzíveis')
 
 # Carregamento
 
-CAMINHO = 'transformers.csv'
+# Carregamento 
+# CAMINHO = 'transformers.csv'
+# df = pd.read_csv(CAMINHO, parse_dates=['date'])    
 
-df = pd.read_csv(CAMINHO, parse_dates=['date'])
+URL_RAW = 'https://raw.githubusercontent.com/LeonardoCorreia08/US/main/Deep/data/transformers.csv'
+
+# 1. Carregamento 
+df = pd.read_csv(URL_RAW, parse_dates=['date'])
 df = df.sort_values('date').reset_index(drop=True)
 
 print('=' * 55)
