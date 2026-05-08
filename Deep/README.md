@@ -37,7 +37,7 @@ A temperatura do oleo (`OT`) e o principal indicador da condicao termica do equi
 transformadores-deep-learning/
 |
 |-- data/
-|   `-- transformer_data.csv          # dataset original (17.348 registros horarios)
+|   `-- transformers.csv          # dataset original (17.348 registros horarios)
 |
 |-- notebooks/
 |   |-- Transformadores_Deep_Learning_CRISP_DM.ipynb  # notebook 
@@ -338,8 +338,8 @@ Os tres objetivos do projeto foram alcancados:
 
 ```bash
 # 1. Clone o repositorio
-git clone https://github.com/seu-usuario/transformadores-deep-learning.git
-cd transformadores-deep-learning
+git clone https://github.com/LeonardoCorreia08/US/edit/main/Deep/
+cd Deep
 
 # 2. Instale as dependencias
 pip install -r requirements.txt
