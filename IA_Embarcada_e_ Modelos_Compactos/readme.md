@@ -53,7 +53,7 @@ A aplicação foi desenvolvida nativamente em **C** utilizando o framework **ESP
 ##  Funcionalidades Principais
 
 * **Comunicação de Hardware:** Configuração de barramentos (como I2C, SPI ou GPIO) no ESP32-S3 para interface com periféricos externos.
-* **Leitura Contínua:** Aquisição periódica de dados do sensor `[Substitua pelo nome do sensor, ex: DHT11]` em um loop de execução estável.
+* **Leitura Contínua:** Aquisição periódica de dados do sensor DHT22, com exibição das informações no display OLED e acionamento de alertas visuais e sonoros caso a temperatura atinja limites predefinidos, mantendo um loop de execução estável.
 * **Processamento de Dados:** Conversão das leituras brutas em valores legíveis (ex: graus Celsius, pressão em hPa, ou eixos X/Y/Z).
 * **Telemetria Serial:** Transmissão dos resultados formatados para o monitor serial em tempo real.
 * **Tratamento de Falhas:** Verificação do status de inicialização e leitura para evitar travamentos caso o sensor não responda.
@@ -64,7 +64,9 @@ A aplicação foi desenvolvida nativamente em **C** utilizando o framework **ESP
 * **Framework:** ESP-IDF (Espressif IoT Development Framework)
 * **Simulação:** Wokwi (Integrado ao VS Code)
 * **Microcontrolador:** ESP32-S3
-* **Sensor Integrado:** `[Substitua pelo sensor usado: DHT11, BMP180 ou MPU6050]`
+* **Sensor Integrado:** DHT22 (para medição contínua de temperatura e umidade).
+* **Display Integrado:** OLED SSD1306 (para exibição dos dados e status em tempo real).
+* **Alerta Sonoro:** Buzzer (acionado automaticamente em caso de temperaturas extremas).
 
 ##  Mapeamento de Hardware (Pinout)
 
