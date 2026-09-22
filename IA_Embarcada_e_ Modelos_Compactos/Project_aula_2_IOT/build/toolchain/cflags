@@ -1,0 +1,5 @@
+-mlongcalls
+-fno-builtin-memcpy
+-fno-builtin-memset
+-fno-builtin-bzero
+"-specs=C:/Users/My/Downloads/Project_aula_2_IOT/build/specs/picolibc.specs"
