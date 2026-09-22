@@ -104,7 +104,17 @@ As conexões configuradas no ambiente simulado (`diagram.json`) seguem a seguint
 ##  Exemplo de Saída (Output)
 
 ```text
-I (312) app_main: Inicializando periféricos...
-I (320) sensor: Sensor detectado e configurado com sucesso.
-I (1320) app_main: [Leitura] Valor 1: 24.5 | Valor 2: 60.0
-I (2320) app_main: [Leitura] Valor 1: 24.6 | Valor 2: 60.0
+================================
+A ler o sensor DHT22...
+Temperatura: 63.0 C
+Humidade: 40.0 %
+ -> ALERTA NO TERMINAL: TEMPERATURA MUITO ALTA! (BUZZER LIGADO)
+================================
+A ler o sensor DHT22...
+Temperatura: 20.6 C
+Humidade: 40.0 %
+================================
+A ler o sensor DHT22...
+Temperatura: -20.2 C
+Humidade: 40.0 %
+ -> ALERTA NO TERMINAL: TEMPERATURA MUITO BAIXA! (BUZZER LIGADO)
