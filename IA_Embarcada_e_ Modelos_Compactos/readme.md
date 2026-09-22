@@ -42,7 +42,9 @@ Os seguintes comprovantes visuais (screenshots) devem ser anexados à raiz deste
 
 Este projeto implementa uma aplicação embarcada para leitura e monitoramento de dados em tempo real utilizando o microcontrolador **ESP32-S3**. O sistema estabelece a comunicação com um sensor, processa os dados físicos captados e os transmite continuamente através da interface serial para visualização. 
 
+##  Demonstração Prática
 
+<video src="./demonstracao_wokwi.mp4" width="100%" controls></video>
 
 A aplicação foi desenvolvida nativamente em **C** utilizando o framework **ESP-IDF** e é projetada para ser executada e validada no ambiente de simulação **Wokwi**.
 
