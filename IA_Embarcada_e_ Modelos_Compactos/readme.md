@@ -44,7 +44,7 @@ Este projeto implementa uma aplicação embarcada para leitura e monitoramento d
 
 ##  Demonstração Prática
 
-<video src="./demonstracao_wokwi.mp4" width="100%" controls></video>
+<video src=".US/IA_Embarcada_e_ Modelos_Compactos/demonstracao_wokwi.mp4" width="100%" controls></video>
 
 A aplicação foi desenvolvida nativamente em **C** utilizando o framework **ESP-IDF** e é projetada para ser executada e validada no ambiente de simulação **Wokwi**.
 
