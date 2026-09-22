@@ -42,11 +42,21 @@ Os seguintes comprovantes visuais (screenshots) devem ser anexados à raiz deste
 
 Este projeto implementa uma aplicação embarcada para leitura e monitoramento de dados em tempo real utilizando o microcontrolador **ESP32-S3**. O sistema estabelece a comunicação com um sensor, processa os dados físicos captados e os transmite continuamente através da interface serial para visualização. 
 
-##  Demonstração Prática
+##  Demonstração com video no  VsCode 
 
 
 https://github.com/user-attachments/assets/eca1d241-bb93-4741-a15b-0720683de0ca
 
+##  Demonstração no Wokwi com imagem 
+
+
+**Modo Manual (Ajustando a temperatura manualmente):**
+![Ajuste Manual](ajustando.jpeg)
+
+**Modo Autopiloto (Subindo e descendo a temperatura sozinho):**
+![Modo Autopiloto](autopiloto.jpeg)
+
+## Link para wokwi do projeto [aqui](https://wokwi.com/projects/475891325206053889)
 
 A aplicação foi desenvolvida nativamente em **C** utilizando o framework **ESP-IDF** e é projetada para ser executada e validada no ambiente de simulação **Wokwi**.
 
