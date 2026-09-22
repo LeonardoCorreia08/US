@@ -45,7 +45,7 @@ Este projeto implementa uma aplicação embarcada para leitura e monitoramento d
 ##  Demonstração Prática
 
 
-https://github.com/user-attachments/assets/20306123-f523-4fdf-bbb9-24a74bcd7794
+https://github.com/user-attachments/assets/eca1d241-bb93-4741-a15b-0720683de0ca
 
 
 A aplicação foi desenvolvida nativamente em **C** utilizando o framework **ESP-IDF** e é projetada para ser executada e validada no ambiente de simulação **Wokwi**.
