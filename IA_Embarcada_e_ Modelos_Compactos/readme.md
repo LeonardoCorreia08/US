@@ -60,6 +60,8 @@ https://github.com/user-attachments/assets/eca1d241-bb93-4741-a15b-0720683de0ca
 
 A aplicação foi desenvolvida nativamente em **C** utilizando o framework **ESP-IDF** e é projetada para ser executada e validada no ambiente de simulação **Wokwi**.
 
+[tutorial_idf_docker](https://github.com/LeonardoCorreia08/US/blob/821f043c1f43bb793a7946b59fefc4bd4592de16/IA_Embarcada_e_%20Modelos_Compactos/tutorial%20idf%20docker.md)
+
 ##  Funcionalidades Principais
 
 * **Comunicação de Hardware:** Configuração de barramentos (como I2C, SPI ou GPIO) no ESP32-S3 para interface com periféricos externos.
