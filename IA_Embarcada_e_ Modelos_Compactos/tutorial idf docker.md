@@ -785,6 +785,7 @@ Simulação do ESP32
 
 Com Docker, Dev Containers e Wokwi:
 
+```text
 Project_aula_2_IOT
 │
 ├── .devcontainer
@@ -803,3 +804,4 @@ Project_aula_2_IOT
 │
 ├── CMakeLists.txt
 └── sdkconfig
+```
