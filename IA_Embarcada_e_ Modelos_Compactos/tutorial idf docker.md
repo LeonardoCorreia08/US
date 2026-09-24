@@ -752,25 +752,135 @@ version = 1
 elf = "build/Project_aula_2_IOT.elf"
 firmware = "build/flasher_args.json"
 
-Com Docker, Dev Containers e Wokwi:
+```
+
+> **Importante:** o nome do arquivo `.elf` deve ser exatamente o mesmo gerado durante a compilação do projeto.
+
+---
+
+## 26.2. Executar a simulação
+
+Depois da compilação do projeto, utilize a **extensão Wokwi** instalada no VS Code.
+
+O projeto deverá possuir a configuração necessária do Wokwi, incluindo:
+
+- `wokwi.toml`
+- arquivo `.elf` gerado na pasta `build/`
+- `flasher_args.json` gerado na pasta `build/`
+- arquivo de descrição do circuito, quando necessário, como `diagram.json`
+
+Após a compilação, a simulação poderá ser iniciada diretamente pelo VS Code através dos comandos disponibilizados pela extensão Wokwi.
+
+---
+
+## 26.3. Fluxo recomendado
+
+O fluxo completo de desenvolvimento fica:
 
 ```text
-Project_aula_2_IOT
+Editar código
+      ↓
+Salvar
+      ↓
+Terminal do Dev Container
+      ↓
+source /opt/esp/idf/export.sh
+      ↓
+idf.py build
+      ↓
+Arquivos gerados em build/
+      ↓
+Wokwi
+      ↓
+Simulação do ESP32
+```
+
+### Comandos principais
+
+Dentro do terminal do **Dev Container**, execute:
+
+```bash
+source /opt/esp/idf/export.sh
+```
+
+Depois:
+
+```bash
+idf.py build
+```
+
+Após uma compilação bem-sucedida, os arquivos necessários para a simulação estarão disponíveis na pasta:
+
+`build/`
+
+---
+
+## 26.4. Estrutura final do projeto
+
+Com **Docker + Dev Containers + ESP-IDF + Wokwi**, a estrutura do projeto poderá ficar:
+
+```text
+Project_aula_2_IOT/
 │
-├── .devcontainer
+├── .devcontainer/
 │   └── devcontainer.json
 │
-├── main
+├── main/
 │   ├── main.c
 │   └── CMakeLists.txt
 │
-├── build
+├── build/
 │   ├── Project_aula_2_IOT.elf
 │   ├── flasher_args.json
 │   └── ...
 │
+├── diagram.json
 ├── wokwi.toml
-│
 ├── CMakeLists.txt
-└── sdkconfig
+└── README.md
 ```
+
+### Arquivos principais
+
+| Arquivo/Pasta | Função |
+|---|---|
+| `.devcontainer/` | Configuração do ambiente de desenvolvimento |
+| `main/` | Código-fonte principal do ESP32 |
+| `build/` | Arquivos gerados pelo `idf.py build` |
+| `wokwi.toml` | Configuração da integração com o Wokwi |
+| `diagram.json` | Descrição dos componentes e conexões do circuito |
+| `CMakeLists.txt` | Configuração de compilação do projeto |
+| `README.md` | Documentação do projeto |
+
+> O arquivo `diagram.json` é utilizado quando a simulação precisa representar componentes e conexões do circuito.
+
+---
+
+## 26.5. Resultado esperado
+
+Ao final desta etapa, o ambiente deverá funcionar da seguinte forma:
+
+```text
+VS Code
+   │
+   ├── Dev Container
+   │      │
+   │      └── ESP-IDF
+   │             │
+   │             └── idf.py build
+   │                    │
+   │                    └── build/
+   │
+   └── Wokwi
+          │
+          ├── wokwi.toml
+          ├── diagram.json
+          └── build/
+                 │
+                 └── Project_aula_2_IOT.elf
+                            │
+                            ↓
+                     Simulação ESP32
+```
+
+Com isso, o projeto estará configurado para desenvolver, compilar e simular o ESP32 utilizando **VS Code, Docker, Dev Container, ESP-IDF e Wokwi**.
