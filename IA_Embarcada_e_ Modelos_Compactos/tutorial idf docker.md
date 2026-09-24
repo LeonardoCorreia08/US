@@ -736,52 +736,21 @@ C:\docker\projeto\
 │
 └── Project_aula_2_IOT\
 ```
-#26 adicionar a extensao do wokwi 
+# 26. Adicionar a extensão do Wokwi
 
-26.1. Criar o wokwi.toml
+## 26.1. Criar o wokwi.toml
 
 Na raiz do projeto, crie:
 
-wokwi.toml
+`wokwi.toml`
 
 Exemplo:
 
+```toml
 [wokwi]
 version = 1
 elf = "build/Project_aula_2_IOT.elf"
 firmware = "build/flasher_args.json"
-
-26.2. Executar a simulação
-
-Depois da compilação, utilize a extensão Wokwi no VS Code.
-
-O projeto deverá possuir a configuração necessária do Wokwi, incluindo o wokwi.toml e, quando necessário, o arquivo de descrição do circuito.
-
-A simulação poderá então ser iniciada pelo próprio VS Code através dos comandos disponibilizados pela extensão.
-
-
-26.3. Fluxo recomendado
-
-O fluxo completo fica:
-
-Editar código
-     ↓
-Salvar
-     ↓
-Terminal do Dev Container
-     ↓
-. /opt/esp/idf/export.sh
-     ↓
-idf.py build
-     ↓
-Arquivos gerados em build/
-     ↓
-Wokwi
-     ↓
-Simulação do ESP32
-
-
-26.4. Estrutura final do projeto
 
 Com Docker, Dev Containers e Wokwi:
 
