@@ -199,12 +199,7 @@ Caso o container ainda não exista, nada acontecerá.
 O comando principal utilizado pelo script é:
 
 ```bash
-docker run -d \
-    --name meu-projeto-esp \
-    -v "C:\docker\projeto:/workspace" \
-    -w /workspace \
-    espressif/idf:release-v6.1 \
-    tail -f /dev/null
+docker run -d --name meu-projeto-esp -v "C:\docker\projeto:/workspace" -w /workspace espressif/idf:release-v6.1 tail -f /dev/null
 ```
 
 Cada parte possui uma função.
