@@ -140,8 +140,7 @@ docker rm -f meu-projeto-esp >nul 2>&1
 echo.
 echo Criando e iniciando o container meu-projeto-esp...
 
-docker run -d ^
-    --name meu-projeto-esp -v "C:\docker\projeto:/workspace" -w /workspace espressif/idf:release-v6.1 tail -f /dev/null
+docker run -d --name meu-projeto-esp -v "C:\docker\projeto:/workspace" -w /workspace espressif/idf:release-v6.1 tail -f /dev/null
 
 echo.
 echo ==========================================
