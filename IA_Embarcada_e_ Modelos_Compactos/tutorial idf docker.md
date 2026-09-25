@@ -141,11 +141,7 @@ echo.
 echo Criando e iniciando o container meu-projeto-esp...
 
 docker run -d ^
-    --name meu-projeto-esp ^
-    -v "C:\docker\projeto:/workspace" ^
-    -w /workspace ^
-    espressif/idf:release-v6.1 ^
-    tail -f /dev/null
+    --name meu-projeto-esp -v "C:\docker\projeto:/workspace" -w /workspace espressif/idf:release-v6.1 tail -f /dev/null
 
 echo.
 echo ==========================================
