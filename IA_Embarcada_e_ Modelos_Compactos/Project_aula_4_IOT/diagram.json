@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "author": "Leonardo Correia",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-s3-devkitc-1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 249.6,
+      "left": 19.2,
+      "rotate": 180,
+      "attrs": {
+        "volume": "0.1"
+      }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -14.4,
+      "left": -142.5,
+      "rotate": 270,
+      "attrs": {
+        "humidity": "58",
+        "temperature": "21.8"
+      }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht2",
+      "top": -57.3,
+      "left": 426.6,
+      "attrs": {
+        "humidity": "55",
+        "temperature": "22.5"
+      }
+    },
+    {
+      "type": "wokwi-gas-sensor",
+      "id": "gas1",
+      "top": 108.3,
+      "left": -185,
+      "attrs": {}
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled1",
+      "top": 223.94,
+      "left": 153.83,
+      "attrs": {
+        "i2cAddress": "0x3c"
+      }
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled2",
+      "top": 223.94,
+      "left": -162.97,
+      "attrs": {
+        "i2cAddress": "0x3d"
+      }
+    },
+    {
+      "type": "wokwi-lcd2004",
+      "id": "lcd1",
+      "top": -262.4,
+      "left": 130.4,
+      "attrs": {
+        "pins": "i2c"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -61.2,
+      "left": -63.4,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": -99.6,
+      "left": 32.6,
+      "attrs": {
+        "color": "yellow"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": -61.2,
+      "left": 119,
+      "attrs": {
+        "color": "limegreen"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnEnergia",
+      "top": 120,
+      "left": 500,
+      "label": "ENERGIA",
+      "attrs": {
+        "color": "black",
+        "xray": "1"
+      }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:GND", "esp:GND.2", "black", [] ],
+    [ "dht1:SDA", "esp:4", "green", [] ],
+    [ "dht1:VCC", "esp:3V3", "red", [] ],
+    [ "dht2:GND", "esp:GND.2", "black", [] ],
+    [ "dht2:SDA", "esp:16", "green", [] ],
+    [ "dht2:VCC", "esp:3V3", "red", [] ],
+    [ "gas1:AOUT", "esp:7", "green", [] ],
+    [ "gas1:GND", "esp:GND.1", "black", [] ],
+    [ "gas1:VCC", "esp:5V", "red", [] ],
+    [ "esp:14", "bz1:2", "green", [] ],
+    [ "esp:GND.3", "bz1:1", "black", [] ],
+    [ "oled1:GND", "esp:GND.3", "black", [] ],
+    [ "oled1:VCC", "esp:3V3", "red", [] ],
+    [ "oled1:SCL", "esp:9", "white", [] ],
+    [ "oled1:SDA", "esp:8", "magenta", [] ],
+    [ "oled2:GND", "esp:GND.3", "black", [] ],
+    [ "oled2:VCC", "esp:3V3", "red", [] ],
+    [ "oled2:SCL", "esp:9", "white", [] ],
+    [ "oled2:SDA", "esp:8", "magenta", [] ],
+    [ "lcd1:GND", "esp:GND.1", "black", [] ],
+    [ "lcd1:VCC", "esp:5V", "red", [] ],
+    [ "lcd1:SCL", "esp:9", "white", [] ],
+    [ "lcd1:SDA", "esp:8", "magenta", [] ],
+    [ "led1:A", "esp:10", "green", [] ],
+    [ "led1:C", "esp:GND.1", "black", [] ],
+    [ "led2:A", "esp:11", "green", [] ],
+    [ "led2:C", "esp:GND.1", "black", [] ],
+    [ "led3:A", "esp:12", "green", [] ],
+    [ "led3:C", "esp:GND.1", "black", [] ],
+    [ "btnEnergia:1.l", "esp:17", "green", [] ],
+    [ "btnEnergia:2.l", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}
