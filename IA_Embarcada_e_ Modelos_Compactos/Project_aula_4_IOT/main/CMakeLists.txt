@@ -3,15 +3,12 @@ idf_component_register(
         "main.c"
         "datacenter.c"
 
-        # IA anterior - manter
-        "tflite_runner.cc"
+        # IA V1 - Datacenter        
         "preprocessamento.c"
         "mpu6050.c"
         "oled.c"
         "buzzer.c"
-        "model/modelo_v0_int8.cc"
-
-        # IA V1 - Datacenter
+        "model/modelo_v1_int8.cc"        
         "tflite_runner_v1.cc"
 
     INCLUDE_DIRS
