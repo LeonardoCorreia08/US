@@ -1,0 +1,6 @@
+{
+    "name": "Ambiente ESP-IDF",
+    "image": "espressif/idf:release-v6.1",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "workspaceFolder": "/workspace"
+}
