@@ -1,53 +1,44 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C5 | ESP32-C6 | ESP32-C61 | ESP32-H2 | ESP32-H21 | ESP32-H4 | ESP32-P4 | ESP32-S2 | ESP32-S3 | ESP32-S31 | Linux |
+# Atividade Avaliativa Prática (4/6)
+
+**Conteúdo principal**
+
+**Condições de conclusão:**
+* Reproduza os passos do Hello World;
+* Print da tela do Wokwi rodando o Hello World;
+* Análise do código e documentação em um breve relatório sobre as observações encontradas;
+
+---
+
+| Alvos Suportados | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C5 | ESP32-C6 | ESP32-C61 | ESP32-H2 | ESP32-H21 | ESP32-H4 | ESP32-P4 | ESP32-S2 | ESP32-S3 | ESP32-S31 | Linux |
 | ----------------- | ----- | -------- | -------- | -------- | -------- | --------- | -------- | --------- | -------- | -------- | -------- | -------- | --------- | ----- |
 
-# Hello World Example
+# Exemplo Hello World
 
-Starts a FreeRTOS task to print "Hello World".
+Inicia uma tarefa do FreeRTOS para imprimir "Hello World".
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+*(Consulte o arquivo README.md no diretório 'examples' superior para obter mais informações sobre os exemplos.)*
 
-## How to use example
+## Como usar o exemplo
 
-Follow detailed instructions provided specifically for this example.
+Siga as instruções detalhadas fornecidas especificamente para este exemplo.
 
-Select the instructions depending on Espressif chip installed on your development board:
+Selecione as instruções dependendo do chip Espressif instalado na sua placa de desenvolvimento:
 
-- [ESP32 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html)
-- [ESP32-S2 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/index.html)
+* [Guia de Introdução ao ESP32](https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html)
+* [Guia de Introdução ao ESP32-S2](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/index.html)
 
+## Conteúdo da pasta do exemplo
 
-## Example folder contents
+O projeto **hello_world** contém um arquivo fonte na linguagem C [hello_world_main.c](main/hello_world_main.c). O arquivo está localizado na pasta [main](main).
 
-The project **hello_world** contains one source file in C language [hello_world_main.c](main/hello_world_main.c). The file is located in folder [main](main).
+Os projetos do ESP-IDF são construídos usando o CMake. A configuração de compilação do projeto está contida nos arquivos `CMakeLists.txt`, que fornecem um conjunto de diretrizes e instruções descrevendo os arquivos fonte e os alvos do projeto (executável, biblioteca ou ambos).
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt` files that provide set of directives and instructions describing the project's source files and targets (executable, library, or both).
+Abaixo está uma breve explicação dos arquivos restantes na pasta do projeto:
 
-Below is short explanation of remaining files in the project folder.
-
-```
+```text
 ├── CMakeLists.txt
-├── pytest_hello_world.py      Python script used for automated testing
+├── pytest_hello_world.py     Script Python usado para testes automatizados
 ├── main
 │   ├── CMakeLists.txt
 │   └── hello_world_main.c
-└── README.md                  This is the file you are currently reading
-```
-
-For more information on structure and contents of ESP-IDF projects, please refer to Section [Build System](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html) of the ESP-IDF Programming Guide.
-
-## Troubleshooting
-
-* Program upload failure
-
-    * Hardware connection is not correct: run `idf.py -p PORT monitor`, and reboot your board to see if there are any output logs.
-    * The baud rate for downloading is too high: lower your baud rate in the `menuconfig` menu, and try again.
-
-## Technical support and feedback
-
-Please use the following feedback channels:
-
-* For technical queries, go to the [esp32.com](https://esp32.com/) forum
-* For a feature request or bug report, create a [GitHub issue](https://github.com/espressif/esp-idf/issues)
-
-We will get back to you as soon as possible.
+└── README.md                 Este é o arquivo que você está lendo atualmente
