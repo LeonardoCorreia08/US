@@ -51,10 +51,10 @@ https://github.com/user-attachments/assets/eca1d241-bb93-4741-a15b-0720683de0ca
 
 
 **Modo Manual (Ajustando a temperatura manualmente):**
-![Ajuste Manual](ajustando.jpeg)
+![Ajuste Manual](../assets/ajustando.jpeg)
 
 **Modo Autopiloto (Subindo e descendo a temperatura sozinho):**
-![Modo Autopiloto](autopiloto.jpeg)
+![Modo Autopiloto](../assets/autopiloto.jpeg)
 
 ## Link para wokwi do projeto [aqui](https://wokwi.com/projects/475891325206053889)
 
