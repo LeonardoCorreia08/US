@@ -7,9 +7,24 @@
 #include "esp_flash.h"
 #include "esp_system.h"
 
+#include "tensorflow/lite/micro/micro_interpreter.h"
+#include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
+#include "tensorflow/lite/schema/schema_generated.h"
+#include "model/hello_world_int8.h"
+
+
 void app_main(void)
 {
     printf("Hello world!\n");
+    
+    const tflite::Model* model = tflite::GetModel(hello_world_int8);
+
+    if (model->version() != TFLITE_SCHEMA_VERSION) {
+        printf("Modelo incompatível com a versão do TensorFlow Lite Micro.\n");
+        return;
+    }
+
+    printf("Modelo TensorFlow Lite carregado com sucesso.\n");
     
     esp_chip_info_t chip_info;
     uint32_t flash_size;
@@ -34,6 +49,7 @@ void app_main(void)
            (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
 
     printf("Minimum free heap size: %" PRIu32 " bytes\n", esp_get_minimum_free_heap_size());
+    printf("TESTE NOVO FIRMWARE\n");
 
     for (int i = 5; i >= 0; i--) {
         printf("Restarting in %d seconds...\n", i);
