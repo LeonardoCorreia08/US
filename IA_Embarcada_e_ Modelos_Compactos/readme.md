@@ -8,7 +8,7 @@ O foco principal dos trabalhos aqui presentes é a otimização, quantização e
 
 As principais linguagens, frameworks e hardwares explorados ao longo das atividades incluem:
 
-* **Hardware e Simulação:** ESP32 (ESP32-S3), Simulador Wokwi, MQ2, Sensores (MPU6050, DHT11)
+* **Hardware e Simulação:** ESP32 (ESP32-S3), Simulador Wokwi, Sensores (MPU6050, DHT11, MQ2)
 * **Ecossistema Embarcado:** C/C++, ESP-IDF
 * **Inteligência Artificial:** Python, TensorFlow Lite / TensorFlow Lite for Microcontrollers, PyTorch
 * **Ferramentas de Suporte:** Jupyter Notebooks, VsCode, Docker, Git
