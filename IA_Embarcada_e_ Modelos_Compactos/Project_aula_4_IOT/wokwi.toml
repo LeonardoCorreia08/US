@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+elf = "build/Project_aula_4_IOT.elf"
+firmware = "build/flasher_args.json"
