@@ -9,7 +9,8 @@
 
 static const char *TAG = "MAIN";
 
-
+void app_main(void)
+void app_main(void)
 {
     datacenter_t datacenter;
 
