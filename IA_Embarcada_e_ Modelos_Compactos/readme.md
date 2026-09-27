@@ -16,7 +16,7 @@ As principais linguagens, frameworks e hardwares explorados ao longo das ativida
 ##  Atividades 
 
 
-### [Project_aula_2_IOT](https://github.com/LeonardoCorreia08/US/tree/92cd073fba0901fc702ab0765d843128b60a4413/IA_Embarcada_e_%20Modelos_Compactos/Project_aula_2_IOT) Wokwi[aqui](https://wokwi.com/projects/475891325206053889)
+### [Project_aula_2_IOT](https://github.com/LeonardoCorreia08/US/tree/92cd073fba0901fc702ab0765d843128b60a4413/IA_Embarcada_e_%20Modelos_Compactos/Project_aula_2_IOT) Wokwi [aqui](https://wokwi.com/projects/475891325206053889)
 ================================
 ### [Project_aula_4_IOT](https://github.com/LeonardoCorreia08/US/tree/92cd073fba0901fc702ab0765d843128b60a4413/IA_Embarcada_e_%20Modelos_Compactos/Project_aula_4_IOT)
 
