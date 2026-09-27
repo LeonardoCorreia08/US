@@ -1,0 +1,30 @@
+dependencies:
+  esp-idf-lib/esp_idf_lib_helpers:
+    version: '*'
+description: Driver for DHT11, AM2301 (DHT21, DHT22, AM2302, AM2321), Itead Si7021
+discussion: https://github.com/esp-idf-lib/core/discussions
+documentation: https://esp-idf-lib.github.io/dht/
+files:
+  exclude:
+  - docs/**/*
+issues: https://github.com/esp-idf-lib/dht/issues
+license: BSD-3
+maintainers:
+- Ruslan V. Uss (@UncleRus) <unclerus@gmail.com>
+repository: git://github.com/esp-idf-lib/dht.git
+repository_info:
+  commit_sha: ac43a691f5ec14ec0608deff5c64b1b06f90f12c
+  path: .
+targets:
+- esp32
+- esp32c2
+- esp32c3
+- esp32c5
+- esp32c6
+- esp32c61
+- esp32h2
+- esp32p4
+- esp32s2
+- esp32s3
+url: https://github.com/esp-idf-lib/core
+version: 1.2.0
