@@ -34,7 +34,7 @@ O projeto foi validado em ambiente simulado e containerizado, cumprindo todos os
 
 Para quem está começando, pode parecer estranho rodar uma IA em um chip tão pequeno. O fluxo funciona em 4 etapas diretas:
 
-\`\`\`
+```
 [ Modelo Treinado .tflite ]
             │
             ▼ (conversão via Python)
@@ -45,7 +45,7 @@ Para quem está começando, pode parecer estranho rodar uma IA em um chip tão p
             │
             ▼ (chama a cada 500 ms)
 [ Código Principal C (hello_world_main.c) ]  <-- Mostra o resultado no terminal
-\`\`\`
+```
 
 1. **O Modelo (\`hello_world_int8.tflite\`):** É a rede neural treinada. Como o microcontrolador não tem um disco rígido para "abrir" um arquivo, nós transformamos esse arquivo em uma lista de números hexadecimais em C (\`hello_world_int8.h\`) para ele ficar gravado diretamente na memória flash do chip.
 2. **A "Ponte" C e C++ (\`tflite_runner_v1.cc\` e \`.h\`):** O TensorFlow Lite é escrito em C++, mas o ponto de entrada padrão do ESP-IDF usa C puro. Criamos um adaptador (*wrapper*) para que o nosso código em C consiga pedir previsões para a IA sem dar conflitos entre linguagens.
