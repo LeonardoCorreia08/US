@@ -104,7 +104,7 @@ x: 2.60 | y (inferencia): -0.703842
 https://github.com/user-attachments/assets/82a58946-9cfd-4caf-86b5-05a67394a270
 
 > 
-> *(Tela do Wokwi)*
+> *(Gravação do Hello World no simulador Wokwi)*
 
 ---
 
