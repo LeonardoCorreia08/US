@@ -4,8 +4,7 @@ idf_component_register(
         "datacenter.c"
 
         # IA V1 - Datacenter        
-        "preprocessamento.c"
-        "mpu6050.c"
+        "preprocessamento.c"        
         "oled.c"
         "buzzer.c"
         "model/modelo_v1_int8.cc"        
