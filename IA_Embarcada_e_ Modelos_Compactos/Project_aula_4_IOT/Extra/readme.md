@@ -85,6 +85,19 @@ Os cenários simulam situações:
 
 A cada ciclo, os valores são enviados para o modelo de IA, permitindo observar no monitor serial várias classificações consecutivas.
 
+# Projeto Extra
+### Comprovação Visual no Simulador (Wokwi)
+
+> **Observação para entrega:**
+> 
+
+https://github.com/user-attachments/assets/090968d5-dac6-4ba3-b65c-3a1873a2672d
+
+> 
+> *(Gravação do Hello World no simulador Wokwi)*
+
+
+
 Esse modo foi desenvolvido principalmente para demonstrar o funcionamento da inferência embarcada e verificar o comportamento do modelo diante de diferentes condições.
 
 ---
