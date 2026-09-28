@@ -1,61 +1,36 @@
 #include <stdio.h>
-#include <inttypes.h>
-#include "sdkconfig.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "esp_chip_info.h"
-#include "esp_flash.h"
-#include "esp_system.h"
+#include "tflite_runner.h"
 
-#include "tensorflow/lite/micro/micro_interpreter.h"
-#include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
-#include "tensorflow/lite/schema/schema_generated.h"
-#include "model/hello_world_int8.h"
+void app_main(void) {
+    printf("Inicializando modelo TFLite...\n");
 
-
-void app_main(void)
-{
-    printf("Hello world!\n");
-    
-    const tflite::Model* model = tflite::GetModel(hello_world_int8);
-
-    if (model->version() != TFLITE_SCHEMA_VERSION) {
-        printf("Modelo incompatível com a versão do TensorFlow Lite Micro.\n");
+    if (model_init() != 0) {
+        printf("Falha ao inicializar o modelo TFLite!\n");
         return;
     }
 
-    printf("Modelo TensorFlow Lite carregado com sucesso.\n");
-    
-    esp_chip_info_t chip_info;
-    uint32_t flash_size;
-    esp_chip_info(&chip_info);
-    printf("This is %s chip with %d CPU core(s), %s%s%s%s, ",
-           CONFIG_IDF_TARGET,
-           chip_info.cores,
-           (chip_info.features & CHIP_FEATURE_WIFI_BGN) ? "WiFi/" : "",
-           (chip_info.features & CHIP_FEATURE_BT) ? "BT" : "",
-           (chip_info.features & CHIP_FEATURE_BLE) ? "BLE" : "",
-           (chip_info.features & CHIP_FEATURE_IEEE802154) ? ", 802.15.4 (Zigbee/Thread)" : "");
+    printf("Modelo carregado com sucesso!\n");
 
-    unsigned major_rev = chip_info.revision / 100;
-    unsigned minor_rev = chip_info.revision % 100;
-    printf("silicon revision v%d.%d, ", major_rev, minor_rev);
-    if(esp_flash_get_size(NULL, &flash_size) != ESP_OK) {
-        printf("Get flash size failed");
-        return;
+    float x = 0.0f;
+    float y = 0.0f;
+
+    // Loop contínuo de inferência
+    while (1) {
+        if (model_run(x, &y) == 0) {
+            printf("x: %.2f | y (inferencia): %.6f\n", x, y);
+        } else {
+            printf("Erro na inferencia!\n");
+        }
+
+        // Incrementa a entrada de 0 a ~6.28 (2 * PI) para varrer o seno
+        x += 0.2f;
+        if (x > 6.28f) {
+            x = 0.0f;
+        }
+
+        // Aguarda 500 ms antes da próxima inferência
+        vTaskDelay(pdMS_TO_TICKS(500));
     }
-
-    printf("%" PRIu32 "MB %s flash\n", flash_size / (uint32_t)(1024 * 1024),
-           (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
-
-    printf("Minimum free heap size: %" PRIu32 " bytes\n", esp_get_minimum_free_heap_size());
-    printf("TESTE NOVO FIRMWARE\n");
-
-    for (int i = 5; i >= 0; i--) {
-        printf("Restarting in %d seconds...\n", i);
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
-    }
-    printf("Restarting now.\n");
-    fflush(stdout);
-    esp_restart();
 }

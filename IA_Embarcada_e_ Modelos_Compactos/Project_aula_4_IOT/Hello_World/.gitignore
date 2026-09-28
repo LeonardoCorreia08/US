@@ -3,3 +3,4 @@ __pycache__/
 .githooks/
 managed_components/
 build
+esp-tflite-micro

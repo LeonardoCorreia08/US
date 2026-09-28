@@ -985,6 +985,19 @@ CONFIG_PARTITION_TABLE_MD5=y
 # end of Partition Table
 
 #
+# ESP-NN
+#
+# default:
+# CONFIG_NN_ANSI_C is not set
+# default:
+CONFIG_NN_OPTIMIZED=y
+# default:
+CONFIG_NN_OPTIMIZATIONS=1
+# default:
+# CONFIG_NN_SKIP_NUDGE is not set
+# end of ESP-NN
+
+#
 # Compiler options
 #
 # default:
@@ -1074,6 +1087,40 @@ CONFIG_COMPILER_CXX_GLIBCXX_CONSTEXPR_NO_CHANGE=y
 #
 # If a component configuration is missing, please add it to the main component's requirements
 #
+
+#
+# Legacy Driver Configurations
+#
+
+#
+# Legacy TWAI Driver Configurations
+#
+# default:
+# CONFIG_TWAI_ISR_IN_IRAM_LEGACY is not set
+# default:
+# CONFIG_TWAI_SUPPRESS_DEPRECATE_WARN is not set
+# default:
+# CONFIG_TWAI_SKIP_LEGACY_CONFLICT_CHECK is not set
+# end of Legacy TWAI Driver Configurations
+
+#
+# Legacy I2C Driver Configurations
+#
+# default:
+# CONFIG_I2C_SUPPRESS_DEPRECATE_WARN is not set
+# default:
+# CONFIG_I2C_SKIP_LEGACY_CONFLICT_CHECK is not set
+# end of Legacy I2C Driver Configurations
+
+#
+# Legacy Touch Sensor Driver Configurations
+#
+# default:
+# CONFIG_TOUCH_SUPPRESS_DEPRECATE_WARN is not set
+# default:
+# CONFIG_TOUCH_SKIP_LEGACY_CONFLICT_CHECK is not set
+# end of Legacy Touch Sensor Driver Configurations
+# end of Legacy Driver Configurations
 
 #
 # eFuse Bit Manager
@@ -1324,6 +1371,15 @@ CONFIG_PM_RESTORE_CACHE_TAGMEM_AFTER_LIGHT_SLEEP=y
 # default:
 CONFIG_PM_ESP_SLEEP_POWER_DOWN_CPU=y
 # end of Power Management
+
+#
+# ESP Ringbuf
+#
+# default:
+# CONFIG_RINGBUF_IN_IRAM is not set
+# default:
+# CONFIG_RINGBUF_PLACE_ISR_FUNCTIONS_INTO_FLASH is not set
+# end of ESP Ringbuf
 
 #
 # ESP-ROM
