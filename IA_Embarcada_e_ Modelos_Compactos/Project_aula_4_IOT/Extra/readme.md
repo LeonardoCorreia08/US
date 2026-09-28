@@ -805,21 +805,19 @@ Após realizar o build:
 
 ### Execução no VS Code
 
-<!-- Adicionar aqui o vídeo da execução -->
+> 
 
-### Execução no Wokwi
+https://github.com/user-attachments/assets/090968d5-dac6-4ba3-b65c-3a1873a2672d
 
-<!-- Adicionar aqui as imagens da execução -->
+> 
 
 Exemplo:
 
 ```markdown
-![Sistema funcionando](imagens/wokwi.png)
+![<img width="1018" height="574" alt="image" src="https://github.com/user-attachments/assets/a2134fe6-eb22-4bd1-a859-40cb58e4cf44" />
+
 ```
 
-### Link do Wokwi
-
-<!-- Adicionar aqui o link do projeto Wokwi -->
 
 ---
 
