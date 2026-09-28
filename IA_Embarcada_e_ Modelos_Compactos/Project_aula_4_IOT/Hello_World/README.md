@@ -30,8 +30,7 @@ O projeto foi validado em ambiente simulado e containerizado, cumprindo todos os
 
 ---
 
-## 2. Como tudo isso funciona? (Explicado de forma simples)
-
+## 2. Como tudo isso funciona? (
 Para quem está começando, pode parecer estranho rodar uma IA em um chip tão pequeno. O fluxo funciona em 4 etapas diretas:
 
 ```
