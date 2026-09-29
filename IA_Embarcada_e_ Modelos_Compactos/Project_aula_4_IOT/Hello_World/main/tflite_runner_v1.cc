@@ -12,7 +12,7 @@ namespace {
     TfLiteTensor* input_tensor = nullptr;
     TfLiteTensor* output_tensor = nullptr;
 
-    // Tamanho da arena de tensores (ajuste se seu modelo for maior)
+    // Tamanho da arena de tensores 
     constexpr int kTensorArenaSize = 4 * 1024;
     alignas(16) uint8_t tensor_arena[kTensorArenaSize];
 
@@ -23,13 +23,13 @@ namespace {
 extern "C" {
 
 int model_init(void) {
-    // Altere g_hello_world_int8 para o nome exato da variável no seu hello_world_int8.h
+    
     model = tflite::GetModel(g_hello_world_int8);
     if (model->version() != TFLITE_SCHEMA_VERSION) {
         return -1;
     }
 
-    // Registra as operações do modelo hello_world (FC e ReLU)
+    // Registra as operações d modelo hello_world 
     resolver.AddFullyConnected();
     resolver.AddRelu();
 
@@ -59,12 +59,12 @@ int model_run(float input, float *output) {
 
     input_tensor->data.int8[0] = x_quantized;
 
-    // Execução da inferência
+    // Exec da inferência
     if (interpreter->Invoke() != kTfLiteOk) {
         return -2;
     }
 
-    // Dequantização de int8 para float
+    // int8 para float
     int8_t y_quantized = output_tensor->data.int8[0];
     int32_t zero_point_out = output_tensor->params.zero_point;
     float scale_out = output_tensor->params.scale;
@@ -74,4 +74,4 @@ int model_run(float input, float *output) {
     return 0;
 }
 
-} // extern "C"
+} 

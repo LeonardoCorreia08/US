@@ -12,4 +12,4 @@ int model_run(float input, float *output);
 }
 #endif
 
-#endif // TFLITE_RUNNER_H
+#endif

@@ -30,11 +30,10 @@ O projeto foi validado em ambiente simulado e containerizado, cumprindo todos os
 
 ---
 
-## 2. Como tudo isso funciona? (Explicado de forma simples)
-
+## 2. Como tudo isso funciona? (
 Para quem está começando, pode parecer estranho rodar uma IA em um chip tão pequeno. O fluxo funciona em 4 etapas diretas:
 
-\`\`\`
+```
 [ Modelo Treinado .tflite ]
             │
             ▼ (conversão via Python)
@@ -45,11 +44,11 @@ Para quem está começando, pode parecer estranho rodar uma IA em um chip tão p
             │
             ▼ (chama a cada 500 ms)
 [ Código Principal C (hello_world_main.c) ]  <-- Mostra o resultado no terminal
-\`\`\`
+```
 
 1. **O Modelo (\`hello_world_int8.tflite\`):** É a rede neural treinada. Como o microcontrolador não tem um disco rígido para "abrir" um arquivo, nós transformamos esse arquivo em uma lista de números hexadecimais em C (\`hello_world_int8.h\`) para ele ficar gravado diretamente na memória flash do chip.
 2. **A "Ponte" C e C++ (\`tflite_runner_v1.cc\` e \`.h\`):** O TensorFlow Lite é escrito em C++, mas o ponto de entrada padrão do ESP-IDF usa C puro. Criamos um adaptador (*wrapper*) para que o nosso código em C consiga pedir previsões para a IA sem dar conflitos entre linguagens.
-3. **Quantização INT8:** Redes neurais no computador usam números quebrados pesados (\`float32\`). Para rodar no ESP32 rápido e consumindo pouca memória, o modelo usa números inteiros de 8 bits (\`int8\`). O nosso código converte o valor antes de entregar para a IA e depois reconverte a resposta para um número legível.
+3. **Quantização INT8:** Redes neurais no computador usam números quebrados pesados (\`float32\`). Para rodar no ESP32 rápido e consumindo pouca memória, o modelo usa números inteiros de 8 bits (\`int8\`). O  código converte o valor antes de entregar para a IA e depois reconverte a resposta para um número legível.
 4. **O Loop Principal (\`hello_world_main.c\`):** O programa principal inicializa a IA uma única vez e, usando uma tarefa do FreeRTOS com \`vTaskDelay\`, faz perguntas contínuas para o modelo a cada 500 milissegundos.
 
 ---
@@ -58,7 +57,7 @@ Para quem está começando, pode parecer estranho rodar uma IA em um chip tão p
 
 Dentro da pasta do projeto, a organização dos arquivos ficou assim:
 
-\`\`\`text
+```text
 ├── CMakeLists.txt              # Configuração global do projeto ESP-IDF
 ├── README.md                   # Este relatório descritivo
 └── main/
@@ -67,7 +66,7 @@ Dentro da pasta do projeto, a organização dos arquivos ficou assim:
     ├── hello_world_int8.h      # Os bytes do modelo de IA embarcado
     ├── tflite_runner.h         # Declaração das funções da ponte (Header C)
     └── tflite_runner_v1.cc     # Implementação do motor de inferência (C++)
-\`\`\`
+```
 
 ---
 
@@ -77,7 +76,7 @@ Dentro da pasta do projeto, a organização dos arquivos ficou assim:
 
 Durante a execução no terminal serial, o bootloader carrega os componentes e entrega o controle para a função principal, iniciando o ciclo de predição:
 
-\`\`\`text
+```text
 I (209) main_task: Calling app_main()
 Inicializando modelo TFLite...
 Modelo carregado com sucesso!
@@ -95,13 +94,17 @@ x: 2.00 | y (inferencia): -0.189800
 x: 2.20 | y (inferencia): -0.340058
 x: 2.40 | y (inferencia): -0.482408
 x: 2.60 | y (inferencia): -0.703842
-\`\`\`
+```
 
 ### Comprovação Visual no Simulador (Wokwi)
 
-> **Observação para entrega:** Insira aqui a captura de tela (print) da janela completa do Wokwi mostrando a placa simulada e o terminal serial rodando os valores acima.
+> **Observação para entrega:**
 > 
-> *(Espaço reservado para o Print da Tela do Wokwi)*
+
+https://github.com/user-attachments/assets/82a58946-9cfd-4caf-86b5-05a67394a270
+
+> 
+> *(Gravação do Hello World no simulador Wokwi)*
 
 ---
 

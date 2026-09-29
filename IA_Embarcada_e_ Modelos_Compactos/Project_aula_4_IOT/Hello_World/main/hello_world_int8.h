@@ -428,4 +428,4 @@ alignas(16) const unsigned char g_hello_world_int8[] = {
 
 const unsigned int g_hello_world_int8_len = 5040;
 
-#endif // HELLO_WORLD_INT8_H
+#endif

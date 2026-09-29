@@ -5,14 +5,14 @@
 extern "C" {
 #endif
 
-// Inicializa o modelo e o interpretador TFLite
+// Init o modelo e o interpretador TFLite
 int model_init(void);
 
-// Executa a inferência passando a entrada e recebendo a saída
+// Exec a inferência passando a entrada e recebendo a saída
 int model_run(float input, float *output);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // TFLITE_RUNNER_H
+#endif

@@ -16,7 +16,7 @@ void app_main(void) {
     float x = 0.0f;
     float y = 0.0f;
 
-    // Loop contínuo de inferência
+    // Loop contínuo da infer
     while (1) {
         if (model_run(x, &y) == 0) {
             printf("x: %.2f | y (inferencia): %.6f\n", x, y);
@@ -24,13 +24,13 @@ void app_main(void) {
             printf("Erro na inferencia!\n");
         }
 
-        // Incrementa a entrada de 0 a ~6.28 (2 * PI) para varrer o seno
+        // Increm a entrada de 0 a ~6.28 (2 * PI) para varrer o seno
         x += 0.2f;
         if (x > 6.28f) {
             x = 0.0f;
         }
 
-        // Aguarda 500 ms antes da próxima inferência
+        // Aguarda 500 ms antes da próxima infer
         vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
