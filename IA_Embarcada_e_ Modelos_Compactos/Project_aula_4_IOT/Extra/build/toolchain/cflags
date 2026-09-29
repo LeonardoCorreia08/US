@@ -1,0 +1,6 @@
+"-specs=/workspace/build/specs/picolibc.specs"
+-D__PICOLIBC_ERRNO_FUNCTION=__errno
+-mlongcalls
+-fno-builtin-memcpy
+-fno-builtin-memset
+-fno-builtin-bzero
