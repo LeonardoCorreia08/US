@@ -8,7 +8,7 @@ extern "C" {
 // Init o modelo e o interpretador TFLite
 int model_init(void);
 
-// Exec a inferência passando a entrada e recebendo a saída
+// Exec a infer passando a entrada e recebendo a saída
 int model_run(float input, float *output);
 
 #ifdef __cplusplus
