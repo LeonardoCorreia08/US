@@ -614,11 +614,18 @@ CRITICO
 0.1%
 ```
 
+https://github.com/user-attachments/assets/9662475f-c5ea-4d20-874f-9ceaf7ac904d
+
+
 ### LCD 20x4
 
 O LCD apresenta informações complementares do sistema e possui páginas de visualização.
 
 ---
+
+
+https://github.com/user-attachments/assets/b41483a4-8f82-4351-964c-a08d8f54e28a
+
 
 ## 19. Sistema de alarmes
 
