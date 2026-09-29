@@ -10,9 +10,8 @@
 # TYPE is a hint to GUIs for the type of VALUE, DO NOT EDIT TYPE!.
 # VALUE is the current value for the KEY.
 
-########################
 # EXTERNAL cache entries
-########################
+
 
 //No help, variable specified on the command line.
 CCACHE_ENABLE:UNINITIALIZED=False
