@@ -1,6 +1,5 @@
 // ============================================================
-// MODELO IA DATACENTER V1 - INT8
-// Gerado automaticamente a partir de modelo_v1_int8.tflite
+// MODELO IA DATACENTER - INT8
 // ============================================================
 
 #include <cstdint>
