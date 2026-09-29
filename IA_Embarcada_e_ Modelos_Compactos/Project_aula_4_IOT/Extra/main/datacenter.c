@@ -24,23 +24,12 @@
 
 static const char *datacenter_cenario_string(uint32_t cenario);
 
-/* =========================================================
- * TAG
- * ========================================================= */
+
 
 static const char *TAG = "DATACENTER";
 
 
-/* =========================================================
- * ADC - SENSOR DE GAS
- *
- * ESP32-S3
- * GPIO7 = ADC1_CH6
- *
- * IMPORTANTE:
- * O valor lido aqui e ADC bruto.
- * Nao representa ppm real.
- * ========================================================= */
+
 
 #define DC_GAS_ADC_UNIT       ADC_UNIT_1
 #define DC_GAS_ADC_CHANNEL    ADC_CHANNEL_6
@@ -68,9 +57,7 @@ static const char *TAG = "DATACENTER";
 #define LCD_I2C_SPEED_HZ   100000
 
 
-/* =========================================================
- * HANDLES I2C
- * ========================================================= */
+/*  I2C  */
 
 static i2c_master_bus_handle_t i2c_bus = NULL;
 
@@ -79,16 +66,12 @@ static i2c_master_dev_handle_t oled2_handle = NULL;
 static i2c_master_dev_handle_t lcd_handle = NULL;
 
 
-/* =========================================================
- * ADC
- * ========================================================= */
+/*  ADC */
 
 static adc_oneshot_unit_handle_t gas_adc_handle = NULL;
 
 
-/* =========================================================
- * ESTADO INTERNO
- * ========================================================= */
+/*  ESTADO INTERNO */
 
 static bool energia_anterior = true;
 
@@ -100,9 +83,7 @@ static uint32_t ultimo_update = 0;
 static uint32_t pagina_lcd = 0;
 
 
-/* =========================================================
- * FONTE 5x7
- * ========================================================= */
+/*  FONTE 5x7 */
 
 static const uint8_t font5x7[][5] =
 {
@@ -148,9 +129,7 @@ static const uint8_t font5x7[][5] =
 };
 
 
-/* =========================================================
- * I2C
- * ========================================================= */
+/* I2C */
 
 static esp_err_t datacenter_i2c_init(void)
 {
@@ -270,9 +249,7 @@ static esp_err_t datacenter_i2c_init(void)
 }
 
 
-/* =========================================================
- * LCD
- * ========================================================= */
+/*  LCD  */
 
 static esp_err_t lcd_pcf8574_write(
     uint8_t valor
@@ -638,9 +615,7 @@ static void lcd_linha(
 }
 
 
-/* =========================================================
- * OLED - COMUNICACAO
- * ========================================================= */
+/* OLED - COMUNICACAO */
 
 static void oled_write_command(
     i2c_master_dev_handle_t handle,
@@ -691,9 +666,7 @@ static void oled_write_data(
 }
 
 
-/* =========================================================
- * OLED - INICIALIZACAO
- * ========================================================= */
+/* OLED - INICIALIZACAO  */
 
 static void oled_init(
     i2c_master_dev_handle_t handle
@@ -733,9 +706,7 @@ static void oled_init(
 }
 
 
-/* =========================================================
- * OLED - LIMPAR
- * ========================================================= */
+/* OLED - LIMPAR */
 
 static void oled_limpar(
     i2c_master_dev_handle_t handle
@@ -775,9 +746,7 @@ static void oled_limpar(
 }
 
 
-/* =========================================================
- * OLED - POSICAO
- * ========================================================= */
+/* OLED - POSICAO  */
 
 static void oled_posicao(
     i2c_master_dev_handle_t handle,
@@ -802,9 +771,7 @@ static void oled_posicao(
 }
 
 
-/* =========================================================
- * OLED - CARACTERE
- * ========================================================= */
+/* OLED - CARACTERE */
 
 static void oled_caractere(
     i2c_master_dev_handle_t handle,
@@ -913,9 +880,7 @@ static void oled_caractere(
 }
 
 
-/* =========================================================
- * OLED - TEXTO
- * ========================================================= */
+/* OLED - TEXTO */
 
 static void oled_texto(
     i2c_master_dev_handle_t handle,
@@ -942,9 +907,7 @@ static void oled_texto(
 }
 
 
-/* =========================================================
- * DHT22
- * ========================================================= */
+/* DHT22 */
 
 static esp_err_t datacenter_ler_dht(
     gpio_num_t gpio,
@@ -994,13 +957,7 @@ static esp_err_t datacenter_ler_dht(
 }
 
 
-/* =========================================================
- * SENSOR DE GAS
- *
- * Retorna o valor bruto do ADC.
- *
- * NAO e ppm.
- * ========================================================= */
+/*  SENSOR DE GAS "Retorna o valor bruto do ADC"  N e ppm. */
 
 static int datacenter_ler_gas(void)
 {
@@ -1048,10 +1005,8 @@ static int datacenter_ler_gas(void)
  * 2 = CRITICO
  *
  * Os valores sao aleatorios dentro de faixas
- * diferentes para facilitar a demonstracao da IA V1.
- *
- * IMPORTANTE:
- * Estes valores NAO representam sensores reais.
+ * diferentes para facilitar a demonstracao da IA.
+ * 
  * ========================================================= */
 
 static float datacenter_aleatorio_float(
@@ -1116,9 +1071,7 @@ static void datacenter_simular_automatico(
 
     switch (cenario)
     {
-        /* =================================================
-         * NORMAL
-         * ================================================= */
+        /*  NORMAL  */
 
         case DC_CENARIO_NORMAL:
 
@@ -1155,9 +1108,7 @@ static void datacenter_simular_automatico(
             break;
 
 
-        /* =================================================
-         * ATENCAO
-         * ================================================= */
+        /*          * ATENCAO         */
 
         case DC_CENARIO_ATENCAO:
 
@@ -1194,9 +1145,7 @@ static void datacenter_simular_automatico(
             break;
 
 
-        /* =================================================
-         * CRITICO
-         * ================================================= */
+        /* * CRITICO */
 
         case DC_CENARIO_CRITICO:
 
@@ -1288,9 +1237,7 @@ static void datacenter_simular_automatico(
 }
 
 
-/* =========================================================
- * STRING DO CENARIO AUTOMATICO
- * ========================================================= */
+/*  * STRING DO CENARIO AUTOMATICO */
 
 static const char *datacenter_cenario_string(
     uint32_t cenario
@@ -1313,9 +1260,7 @@ static const char *datacenter_cenario_string(
 }
 
 
-/* =========================================================
- * HISTORICO
- * ========================================================= */
+/** */ HISTORICO */
 
 static void datacenter_atualizar_historico(
     datacenter_t *dc,
@@ -1431,9 +1376,7 @@ static void datacenter_atualizar_historico(
 }
 
 
-/* =========================================================
- * ENERGIA
- * ========================================================= */
+/*  * ENERGIA */
 
 static void datacenter_atualizar_energia(
     datacenter_t *dc,
@@ -1598,9 +1541,7 @@ static void datacenter_atualizar_estado(
 }
 
 
-/* =========================================================
- * IA V1
- * ========================================================= */
+/* IA  */
 
 static void datacenter_atualizar_ia(
     datacenter_t *dc
@@ -1691,11 +1632,8 @@ static void datacenter_aplicar_modo_controle(
     datacenter_t *dc
 )
 {
-    /*
-     * =====================================================
-     * MODO MANUAL
-     * =====================================================
-     */
+       
+     /* MODO MANUAL  */
 
     if (
         dc->modo_controle ==
@@ -1712,11 +1650,8 @@ static void datacenter_aplicar_modo_controle(
         );
     }
 
-    /*
-     * =====================================================
-     * MODO AUTOMATICO
-     * =====================================================
-     */
+    
+    /*  MODO AUTOMATICO  */
 
     else if (
         dc->modo_controle ==
@@ -1784,11 +1719,8 @@ static void datacenter_aplicar_modo_controle(
         }
     }
 
-    /*
-     * =====================================================
-     * MODO INVALIDO
-     * =====================================================
-     */
+    
+    /*  MODO INVALIDO  */
 
     else
     {
@@ -1807,11 +1739,9 @@ static void datacenter_aplicar_modo_controle(
     }
 
 
-    /*
-     * =====================================================
-     * ALARME
-     * =====================================================
-     */
+    
+    /*  ALARME */   
+     
 
     dc->estado.alarme_ativo =
         (
@@ -1829,9 +1759,7 @@ static void datacenter_aplicar_modo_controle(
 }
 
 
-/* =========================================================
- * STRING DO MODO
- * ========================================================= */
+/*  STRING DO MODO */
 
 static const char *datacenter_modo_string(
     uint8_t modo
@@ -1851,9 +1779,7 @@ static const char *datacenter_modo_string(
 }
 
 
-/* =========================================================
- * STATUS
- * ========================================================= */
+/*  * STATUS */
 
 const char *datacenter_status_string(
     dc_status_t status
@@ -1882,9 +1808,7 @@ const char *datacenter_status_string(
 }
 
 
-/* =========================================================
- * LEDS
- * ========================================================= */
+/* * LEDS */
 
 void datacenter_atualizar_leds(
     datacenter_t *dc
@@ -1946,9 +1870,7 @@ void datacenter_atualizar_leds(
 }
 
 
-/* =========================================================
- * BUZZER
- * ========================================================= */
+/*  BUZZER  */
 
 void datacenter_atualizar_alarme(
     datacenter_t *dc
@@ -1983,9 +1905,7 @@ void datacenter_atualizar_alarme(
 }
 
 
-/* =========================================================
- * OLED 1
- * ========================================================= */
+/*  OLED 1 */
 
 void datacenter_oled_atual(
     datacenter_t *dc
@@ -2055,11 +1975,7 @@ void datacenter_oled_atual(
 }
 
 
-/* =========================================================
- * OLED 2
- *
- * Analise
- * ========================================================= */
+/*  OLED 2 * Analise  */
 
 void datacenter_oled_analise(
     datacenter_t *dc
@@ -2129,9 +2045,7 @@ void datacenter_oled_analise(
 }
 
 
-/* =========================================================
- * IA - TEXTO PARA LCD
- * ========================================================= */
+/*  IA - TEXTO PARA LCD */
 
 static const char *datacenter_ia_string(
     datacenter_t *dc
@@ -2160,9 +2074,7 @@ static const char *datacenter_ia_string(
 }
 
 
-/* =========================================================
- * LCD - PAGINA PRINCIPAL
- * ========================================================= */
+/*  LCD - PAG PRINCIPAL */
 
 static void lcd_pagina_principal(
     datacenter_t *dc
@@ -2222,9 +2134,7 @@ static void lcd_pagina_principal(
 }
 
 
-/* =========================================================
- * LCD - PAGINA ENERGIA
- * ========================================================= */
+/*  LCD - PAG ENERGIA */
 
 static void lcd_pagina_energia(
     datacenter_t *dc
@@ -2290,9 +2200,7 @@ static void lcd_pagina_energia(
 }
 
 
-/* =========================================================
- * LCD - PAGINA CLIMATIZACAO
- * ========================================================= */
+/*  LCD - PAG CLIMATIZACAO */
 
 static void lcd_pagina_clima(
     datacenter_t *dc
@@ -2361,9 +2269,7 @@ static void lcd_pagina_clima(
 }
 
 
-/* =========================================================
- * LCD - ATUALIZACAO
- * ========================================================= */
+/* LCD - ATUALIZACAO */
 
 void datacenter_lcd_atualizar(
     datacenter_t *dc
@@ -2416,9 +2322,7 @@ void datacenter_lcd_atualizar(
 }
 
 
-/* =========================================================
- * GPIO E PWM (LEDC)
- * ========================================================= */
+/*  GPIO E PWM (LEDC)  */
 
 static void datacenter_gpio_init(void)
 {
@@ -2488,9 +2392,7 @@ static void datacenter_gpio_init(void)
 }
 
 
-/* =========================================================
- * ADC
- * ========================================================= */
+/*  ADC */
 
 static esp_err_t datacenter_adc_init(void)
 {
@@ -2548,9 +2450,7 @@ static esp_err_t datacenter_adc_init(void)
 }
 
 
-/* =========================================================
- * INICIALIZACAO
- * ========================================================= */
+/*  INICIALIZACAO */
 
 esp_err_t datacenter_init(
     datacenter_t *dc
@@ -2569,10 +2469,8 @@ esp_err_t datacenter_init(
     );
 
 
-    /*
-     * =====================================================
-     * MODO INICIAL
-     * =====================================================
+    
+    /* MODO INICIAL    
      *
      * 0 = MANUAL
      * 1 = AUTOMATICO
@@ -2597,16 +2495,12 @@ esp_err_t datacenter_init(
         -999.0f;
 
 
-    /* =====================================================
-     * GPIO E PWM
-     * ===================================================== */
+    /*  GPIO E PWM  */
 
     datacenter_gpio_init();
 
 
-    /* =====================================================
-     * I2C
-     * ===================================================== */
+    /*  I2C  */
 
     esp_err_t erro =
         datacenter_i2c_init();
@@ -2617,9 +2511,7 @@ esp_err_t datacenter_init(
     }
 
 
-    /* =====================================================
-     * LCD
-     * ===================================================== */
+    /*   * LCD   */
 
     erro =
         lcd_init();
@@ -2634,9 +2526,7 @@ esp_err_t datacenter_init(
     }
 
 
-    /* =====================================================
-     * OLEDs
-     * ===================================================== */
+    /*  OLEDs   */
 
     oled_init(
         oled1_handle
@@ -2656,9 +2546,7 @@ esp_err_t datacenter_init(
     );
 
 
-    /* =====================================================
-     * ADC
-     * ===================================================== */
+    /* ADC */
 
     erro =
         datacenter_adc_init();
@@ -2675,9 +2563,7 @@ esp_err_t datacenter_init(
     }
 
 
-    /* =====================================================
-     * ENERGIA
-     * ===================================================== */
+    /*  ENERGIA   */
 
     dc->energia.presente =
         gpio_get_level(
@@ -2695,9 +2581,7 @@ esp_err_t datacenter_init(
      */
 
 
-    /* =====================================================
-     * IA V1
-     * ===================================================== */
+    /*  IA  */
 
     dc->ia.disponivel =
         ia_v1_init();
@@ -2762,9 +2646,7 @@ esp_err_t datacenter_init(
 }
 
 
-/* =========================================================
- * ATUALIZACAO
- * ========================================================= */
+/* ATUALIZACAO */
 
 esp_err_t datacenter_atualizar(
     datacenter_t *dc
@@ -2776,9 +2658,7 @@ esp_err_t datacenter_atualizar(
     }
 
 
-    /* =====================================================
-     * TEMPO
-     * ===================================================== */
+    /*  TEMPO  */
 
     uint32_t agora =
         xTaskGetTickCount();
@@ -2826,11 +2706,10 @@ esp_err_t datacenter_atualizar(
     }
 
 
-    /* =====================================================
+    /* 
      * MODO MANUAL
      *
-     * Leitura dos sensores reais.
-     * ===================================================== */
+     * Leitura dos sensores reais.  */
 
     else
     {
@@ -2838,9 +2717,7 @@ esp_err_t datacenter_atualizar(
         float umidade;
 
 
-        /* =================================================
-         * DHT AMBIENTE
-         * ================================================= */
+        /*  DHT AMBIENTE  */
 
         esp_err_t erro =
             datacenter_ler_dht(
@@ -2868,9 +2745,7 @@ esp_err_t datacenter_atualizar(
         }
 
 
-        /* =================================================
-         * DHT EQUIPAMENTOS
-         * ================================================= */
+        /*  DHT EQUIP  */
 
         erro =
             datacenter_ler_dht(
@@ -2898,17 +2773,13 @@ esp_err_t datacenter_atualizar(
         }
 
 
-        /* =================================================
-         * GAS
-         * ================================================= */
+        /*   GAS  */
 
         dc->sensores.gas =
             datacenter_ler_gas();
 
 
-        /* =================================================
-         * ENERGIA
-         * ================================================= */
+        /* ENERGIA */
 
         datacenter_atualizar_energia(
             dc,
@@ -2950,11 +2821,10 @@ esp_err_t datacenter_atualizar(
     );
 
 
-    /* =====================================================
-     * IA V1
+    /* 
+     * IA 
      *
-     * Cada novo cenario passa pela IA.
-     * ===================================================== */
+     * Cada novo cenario passa pela IA.  */
 
     datacenter_atualizar_ia(
         dc
@@ -2976,18 +2846,14 @@ esp_err_t datacenter_atualizar(
     );
 
 
-    /* =====================================================
-     * LEDS
-     * ===================================================== */
+    /* LEDS */
 
     datacenter_atualizar_leds(
         dc
     );
 
 
-    /* =====================================================
-     * BUZZER
-     * ===================================================== */
+    /*  BUZZER  */
 
     datacenter_atualizar_alarme(
         dc

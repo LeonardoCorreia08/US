@@ -1,9 +1,6 @@
 #include "preprocessamento.h"
 
-/*
- * Parâmetros obtidos do StandardScaler
- * utilizado durante o treinamento do modelo.
- */
+/* Parâmetros obtidos do StandardScaler utilizado durante o treinamento do modelo. */
 
 static const float medias[6] = {
     -0.0266507937f,
@@ -23,10 +20,7 @@ static const float escalas[6] = {
     40.7634388961f
 };
 
-/*
- * Parâmetros de quantização INT8
- * obtidos do modelo TensorFlow Lite.
- */
+/* Parâmetros de quantização INT8 obtidos do modelo TensorFlow Lite. */
 static const float INPUT_SCALE = 0.0190876536f;
 static const int INPUT_ZERO_POINT = 1;
 
@@ -37,27 +31,19 @@ void preprocessar_dados(
 {
     for (int i = 0; i < 6; i++)
     {
-        /*
-         * 1. StandardScaler
-         */
+        /* 1. StandardScaler  */
         float normalizado =
             (dados[i] - medias[i]) / escalas[i];
 
-        /*
-         * 2. Quantização para INT8
-         */
+        /* 2. Quantização para INT8       */
         float quantizado =
             (normalizado / INPUT_SCALE)
             + INPUT_ZERO_POINT;
 
-        /*
-         * Arredondamento.
-         */
+        /* Arredondamento. */
         int valor = (int)(quantizado + 0.5f);
 
-        /*
-         * Limites do INT8.
-         */
+        /*Limites do INT8. */
         if (valor > 127)
         {
             valor = 127;

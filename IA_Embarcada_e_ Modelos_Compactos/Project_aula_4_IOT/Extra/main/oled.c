@@ -6,18 +6,11 @@
 
 #include "driver/i2c_master.h"
 
-/*
- * Endereço I2C do OLED SSD1306.
- */
+/*  Endereço I2C do OLED SSD1306. */
+
 #define OLED_ADDR 0x3C
 
-/*
- * ============================================================
- * FONTE 5x8
- * ============================================================
- *
- * Fonte ASCII de 32 até 127.
- */
+/* FONTE 5x8 /  Fonte ASCII de 32 até 127. */
 static const uint8_t font5x8[96][5] = {
     {0x00, 0x00, 0x00, 0x00, 0x00},
     {0x00, 0x00, 0x5f, 0x00, 0x00},
@@ -117,14 +110,10 @@ static const uint8_t font5x8[96][5] = {
     {0x08, 0x14, 0x22, 0x41, 0x00}
 };
 
-/*
- * Dispositivo OLED no barramento I2C.
- */
+/* Dispositivo OLED no barramento I2C. */
 static i2c_master_dev_handle_t oled_dev = NULL;
 
-/*
- * Envia dados para o OLED.
- */
+/* Envia dados para o OLED. */
 static esp_err_t oled_write(
     const uint8_t* dados,
     size_t tamanho
@@ -138,9 +127,7 @@ static esp_err_t oled_write(
     );
 }
 
-/*
- * Envia um comando para o OLED.
- */
+/* Envia um comando p/ o OLED. */
 static esp_err_t oled_command(
     uint8_t comando
 )
@@ -156,9 +143,7 @@ static esp_err_t oled_command(
     );
 }
 
-/*
- * Inicializa o OLED SSD1306.
- */
+/* Inicializa o OLED SSD1306. */
 int oled_init(
     i2c_master_bus_handle_t bus
 )
@@ -172,9 +157,7 @@ int oled_init(
         return -1;
     }
 
-    /*
-     * Configura o OLED no barramento existente.
-     */
+    /* Config o OLED no barramento existente. */
     i2c_device_config_t dev_config = {
         .dev_addr_length = I2C_ADDR_BIT_LEN_7,
         .device_address = OLED_ADDR,
@@ -197,9 +180,7 @@ int oled_init(
         return -2;
     }
 
-    /*
-     * Sequência de inicialização do SSD1306.
-     */
+    /* Seq de inicialização do SSD1306. */
     const uint8_t comandos[] = {
         0xAE,
         0xD5,
@@ -250,9 +231,7 @@ int oled_init(
     return 0;
 }
 
-/*
- * Limpa toda a tela.
- */
+/*  Limpa toda a tela. */
 void oled_clear(void)
 {
     if (oled_dev == NULL)
@@ -260,9 +239,7 @@ void oled_clear(void)
         return;
     }
 
-    /*
-     * Define coluna 0 até 127.
-     */
+    /* Define coluna 0 até 127. */
     uint8_t colunas[] = {
         0x00,
         0x21,
@@ -275,9 +252,7 @@ void oled_clear(void)
         sizeof(colunas)
     );
 
-    /*
-     * Define página 0 até 7.
-     */
+    /* Define página 0 até 7. */
     uint8_t paginas[] = {
         0x00,
         0x22,
@@ -290,9 +265,7 @@ void oled_clear(void)
         sizeof(paginas)
     );
 
-    /*
-     * Limpa as 8 páginas.
-     */
+    /*Limpa as 8 páginas. */
     uint8_t dados[129];
 
     dados[0] = 0x40;
@@ -312,12 +285,10 @@ void oled_clear(void)
     }
 }
 
-/*
- * Escreve texto no OLED.
+/* Escreve texto no OLED.
  *
  * x = coluna em pixels.
- * y = página de 0 a 7.
- */
+ * y = página de 0 a 7.  */
 void oled_print(
     int x,
     int y,
@@ -332,9 +303,7 @@ void oled_print(
         return;
     }
 
-    /*
-     * Limita os valores.
-     */
+    /* Limita os valores. */
     if (x < 0)
     {
         x = 0;
@@ -355,9 +324,7 @@ void oled_print(
         y = 7;
     }
 
-    /*
-     * Posiciona o cursor.
-     */
+    /* Posiciona o cursor. */
     uint8_t comandos[] = {
         0x00,
         (uint8_t)(0xB0 + y),
@@ -370,9 +337,7 @@ void oled_print(
         sizeof(comandos)
     );
 
-    /*
-     * Monta os dados dos caracteres.
-     */
+    /*  Monta os dados dos caracteres.  */
     uint8_t dados[129];
 
     dados[0] = 0x40;
@@ -390,10 +355,7 @@ void oled_print(
             char_idx < 96
         )
         {
-            /*
-             * Cada caractere possui 5 colunas
-             * mais uma coluna de espaço.
-             */
+            /* Cada caractere possui 5 colunas mais uma coluna de espaço. */
             if (indice + 6 > 129)
             {
                 break;
@@ -409,9 +371,7 @@ void oled_print(
         }
     }
 
-    /*
-     * Envia os caracteres para o OLED.
-     */
+    /* Envia os caracteres para o OLED. */
     if (indice > 1)
     {
         oled_write(

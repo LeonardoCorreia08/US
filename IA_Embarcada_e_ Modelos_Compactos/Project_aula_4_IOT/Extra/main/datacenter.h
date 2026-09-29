@@ -8,40 +8,25 @@
 #include "tflite_runner_v1.h"
 
 
-/* ============================================================
- * GPIOs
- * ESP32-S3 DevKitC-1
- * ============================================================ */
+/*  * GPIOs  ESP32-S3 DevKitC-1  */
 
 /* DHT22 */
 #define DC_DHT_AMBIENTE_GPIO       4
 #define DC_DHT_EQUIPAMENTOS_GPIO   16
 
 
-/* ============================================================
- * I2C
- *
- * SDA = GPIO8
- * SCL = GPIO9
- * ============================================================ */
+/* I2C / SDA = GPIO8 / SCL = GPIO9 */
 
 #define DC_I2C_SDA_GPIO            8
 #define DC_I2C_SCL_GPIO            9
 
 
-/* ============================================================
- * SENSOR DE GAS
- *
- * ESP32-S3:
- * ADC1_CH6 = GPIO7
- * ============================================================ */
+/*  SENSOR DE GAS / ESP32-S3: / ADC1_CH6 = GPIO7 */
 
 #define DC_GAS_GPIO                7
 
 
-/* ============================================================
- * SAIDAS
- * ============================================================ */
+/* SAIDAS  */
 
 #define DC_BUZZER_GPIO             14
 
@@ -50,25 +35,19 @@
 #define DC_LED_VERDE_GPIO          12
 
 
-/* ============================================================
- * BOTAO DE ENERGIA
- * ============================================================ */
+/*  BOTAO DE ENERGIA  */
 
 #define DC_ENERGIA_GPIO            17
 
 
-/* ============================================================
- * ENDERECOS I2C
- * ============================================================ */
+/*  ENDERECOS I2C */
 
 #define DC_OLED_1_ADDR             0x3C
 #define DC_OLED_2_ADDR             0x3D
 #define DC_LCD_ADDR                0x27
 
 
-/* ============================================================
- * LIMITES AMBIENTAIS
- * ============================================================ */
+/* LIMITES AMBIENTAIS */
 
 #define DC_TEMP_BAIXA              17.0f
 #define DC_TEMP_ATENCAO            22.0f
@@ -79,9 +58,7 @@
 #define DC_TEMPO_CRITICO_SEG       1800
 
 
-/* ============================================================
- * LIMITES DO SENSOR DE GAS
- * ============================================================ */
+/*  LIMITES DO SENSOR DE GAS */
 
 #define DC_GAS_ATENCAO             1800
 #define DC_GAS_CRITICO             2800
@@ -91,7 +68,7 @@
  * MODO DE CONTROLE
  *
  * 0 = sensores reais / regras tradicionais
- * 1 = simulacao automatica / IA V1
+ * 1 = simulacao automatica / IA 
  * ============================================================ */
 
 #define DC_MODO_MANUAL             0
@@ -112,9 +89,7 @@
 #define DC_TOTAL_CENARIOS          3
 
 
-/* ============================================================
- * ESTADOS
- * ============================================================ */
+/*  ESTADOS */
 
 typedef enum
 {
@@ -131,9 +106,7 @@ typedef enum
 } dc_status_t;
 
 
-/* ============================================================
- * DADOS DOS SENSORES
- * ============================================================ */
+/*  DADOS DOS SENSORES  */
 
 typedef struct
 {
@@ -150,9 +123,7 @@ typedef struct
 } dc_sensores_t;
 
 
-/* ============================================================
- * HISTORICO AMBIENTAL
- * ============================================================ */
+/*  HISTORICO AMBIENTAL  */
 
 typedef struct
 {
@@ -179,9 +150,7 @@ typedef struct
 } dc_historico_t;
 
 
-/* ============================================================
- * ENERGIA
- * ============================================================ */
+/*   ENERGIA */
 
 typedef struct
 {
@@ -196,9 +165,7 @@ typedef struct
 } dc_energia_t;
 
 
-/* ============================================================
- * ESTADO GERAL
- * ============================================================ */
+/*  ESTADO GERAL */
 
 typedef struct
 {
@@ -223,9 +190,7 @@ typedef struct
 } dc_estado_t;
 
 
-/* ============================================================
- * INTELIGENCIA ARTIFICIAL V1
- * ============================================================ */
+/*  INTELIGENCIA ARTIFICIAL   */
 
 typedef struct
 {
@@ -242,9 +207,7 @@ typedef struct
 } dc_ia_t;
 
 
-/* ============================================================
- * ESTRUTURA PRINCIPAL
- * ============================================================ */
+/* ESTRUTURA PRINCIPAL */
 
 typedef struct
 {
@@ -273,27 +236,21 @@ typedef struct
 } datacenter_t;
 
 
-/* ============================================================
- * INICIALIZACAO
- * ============================================================ */
+/*  INICIALIZACAO  */
 
 esp_err_t datacenter_init(
     datacenter_t *dc
 );
 
 
-/* ============================================================
- * ATUALIZACAO
- * ============================================================ */
+/*  ATUALIZACAO */
 
 esp_err_t datacenter_atualizar(
     datacenter_t *dc
 );
 
 
-/* ============================================================
- * DISPLAYS
- * ============================================================ */
+/*  DISPLAYS */
 
 void datacenter_oled_atual(
     datacenter_t *dc
@@ -310,9 +267,7 @@ void datacenter_lcd_atualizar(
 );
 
 
-/* ============================================================
- * LEDS E BUZZER
- * ============================================================ */
+/*  LEDS E BUZZER */
 
 void datacenter_atualizar_leds(
     datacenter_t *dc
@@ -324,9 +279,7 @@ void datacenter_atualizar_alarme(
 );
 
 
-/* ============================================================
- * INFORMACOES
- * ============================================================ */
+/* INFORMACOES */
 
 const char *datacenter_status_string(
     dc_status_t status

@@ -7,13 +7,11 @@
 extern "C" {
 #endif
 
-/*
- * Converte os 6 valores do MPU6050:
+/*Converte os 6 valores do MPU6050:
  *
  * AX, AY, AZ, GX, GY, GZ
  *
- * para o formato INT8 utilizado pelo modelo.
- */
+ * para o formato INT8 utilizado pelo modelo. */
 void preprocessar_dados(
     const float dados[6],
     int8_t resultado[6]

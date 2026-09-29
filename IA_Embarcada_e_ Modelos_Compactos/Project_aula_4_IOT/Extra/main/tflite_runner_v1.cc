@@ -17,9 +17,7 @@
 static const char *TAG = "IA_V1";
 
 
-/* ============================================================
- * CONFIGURAÇÃO DO MODELO
- * ============================================================ */
+/* CONFIGURAÇÃO DO MODELO */
 
 #define IA_V1_INPUTS   6
 #define IA_V1_OUTPUTS  3
@@ -27,18 +25,14 @@ static const char *TAG = "IA_V1";
 #define IA_V1_TENSOR_ARENA_SIZE (12 * 1024)
 
 
-/* ============================================================
- * TENSOR ARENA
- * ============================================================ */
+/* TENSOR */
 
 static uint8_t tensor_arena[
     IA_V1_TENSOR_ARENA_SIZE
 ];
 
 
-/* ============================================================
- * OBJETOS TFLITE MICRO
- * ============================================================ */
+/*  OBJETOS TFLITE MICRO */
 
 static const tflite::Model *modelo = nullptr;
 
@@ -52,16 +46,11 @@ static TfLiteTensor *tensor_saida = nullptr;
 /* Resolver de operações.
  *
  * O modelo possui camadas Dense/FullyConnected,
- * Softmax e operações associadas.
- */
+ * Softmax e operações associadas. */
 static tflite::MicroMutableOpResolver<8> resolver;
 
 
-/* ============================================================
- * SCALER V1
- *
- * Valores obtidos de scaler_v1.npz
- * ============================================================ */
+/* SCALER  /  Valores obtidos de scaler_v1.npz */
 
 static const float scaler_mean[IA_V1_INPUTS] =
 {
@@ -84,9 +73,7 @@ static const float scaler_scale[IA_V1_INPUTS] =
 };
 
 
-/* ============================================================
- * QUANTIZAÇÃO DA ENTRADA
- * ============================================================ */
+/* QUANTIZAÇÃO DA ENTRADA */
 
 static const float INPUT_SCALE =
     0.01982070319354534f;
@@ -95,9 +82,7 @@ static const int INPUT_ZERO_POINT =
     -23;
 
 
-/* ============================================================
- * QUANTIZAÇÃO DA SAÍDA
- * ============================================================ */
+/* QUANTIZAÇÃO DA SAÍDA */
 
 static const float OUTPUT_SCALE =
     0.00390625f;
@@ -106,40 +91,30 @@ static const int OUTPUT_ZERO_POINT =
     -128;
 
 
-/* ============================================================
- * FUNÇÃO AUXILIAR
- * ============================================================ */
+/* FUNÇÃO AUXILIAR */
 
 static int8_t quantizar_entrada(
     float valor,
     int indice
 )
 {
-    /*
-     * 1. StandardScaler
-     */
+    /* 1. StandardScaler */
     float normalizado =
         (valor - scaler_mean[indice])
         / scaler_scale[indice];
 
-    /*
-     * 2. Quantização INT8
-     */
+    /* 2. Quantização INT8 */
     float quantizado =
         (normalizado / INPUT_SCALE)
         + INPUT_ZERO_POINT;
 
-    /*
-     * 3. Arredondamento
-     */
+    /* 3. Arredondamento */
     int32_t valor_int =
         static_cast<int32_t>(
             std::round(quantizado)
         );
 
-    /*
-     * 4. Limite INT8
-     */
+    /* 4. Limite INT8 */
     if (valor_int > 127)
     {
         valor_int = 127;
@@ -156,9 +131,7 @@ static int8_t quantizar_entrada(
 }
 
 
-/* ============================================================
- * INICIALIZAÇÃO
- * ============================================================ */
+/* * INICIALIZAÇÃO */
 
 bool ia_v1_init(void)
 {
@@ -167,9 +140,7 @@ bool ia_v1_init(void)
         "Inicializando modelo IA V1"
     );
 
-    /*
-     * Carrega modelo FlatBuffer
-     */
+    /* Carrega modelo FlatBuffer  */
     modelo = tflite::GetModel(
         modelo_v1_int8_tflite
     );
@@ -184,9 +155,7 @@ bool ia_v1_init(void)
         return false;
     }
 
-    /*
-     * Verifica versão do schema
-     */
+    /** Verifica versão do schema  */
     if (
         modelo->version()
         != TFLITE_SCHEMA_VERSION
@@ -201,9 +170,7 @@ bool ia_v1_init(void)
     }
 
 
-    /* ========================================================
-     * REGISTRAR OPERACOES
-     * ======================================================== */
+    /*  REGISTRAR OPERACOES*/
 
     if (
         resolver.AddFullyConnected()
@@ -245,9 +212,7 @@ bool ia_v1_init(void)
     }
 
 
-    /* ========================================================
-     * CRIAR INTERPRETADOR
-     * ======================================================== */
+    /* CRIAR INTERPRETADOR*/
 
     static tflite::MicroInterpreter
         interpretador_estatico(
@@ -261,9 +226,7 @@ bool ia_v1_init(void)
         &interpretador_estatico;
 
 
-    /* ========================================================
-     * ALOCAR TENSORES
-     * ======================================================== */
+    /* ALOCAR TENSORES */
 
     TfLiteStatus status =
         interpretador->AllocateTensors();
@@ -279,9 +242,7 @@ bool ia_v1_init(void)
     }
 
 
-    /* ========================================================
-     * OBTER TENSORES
-     * ======================================================== */
+    /*  OBTER TENSORES */
 
     tensor_entrada =
         interpretador->input(0);
@@ -305,9 +266,7 @@ bool ia_v1_init(void)
     }
 
 
-    /* ========================================================
-     * VALIDAR ENTRADA
-     * ======================================================== */
+    /* VALIDAR ENTRADA  */
 
     if (
         tensor_entrada->type
@@ -323,9 +282,7 @@ bool ia_v1_init(void)
     }
 
 
-    /* ========================================================
-     * VALIDAR SAIDA
-     * ======================================================== */
+    /* VALIDAR SAIDA  */
 
     if (
         tensor_saida->type
@@ -361,9 +318,7 @@ bool ia_v1_init(void)
 }
 
 
-/* ============================================================
- * INFERÊNCIA
- * ============================================================ */
+/* INFERÊNCIA */
 
 bool ia_v1_predict(
     float temperatura_ambiente,
@@ -389,9 +344,7 @@ bool ia_v1_predict(
     }
 
 
-    /* ========================================================
-     * ENTRADAS
-     * ======================================================== */
+    /*  ENTRADAS  */
 
     float valores[IA_V1_INPUTS] =
     {
@@ -404,9 +357,7 @@ bool ia_v1_predict(
     };
 
 
-    /* ========================================================
-     * NORMALIZAÇÃO + QUANTIZAÇÃO
-     * ======================================================== */
+    /* NORMALIZAÇÃO + QUANTIZAÇÃO */
 
     for (int i = 0; i < IA_V1_INPUTS; i++)
     {
@@ -418,9 +369,7 @@ bool ia_v1_predict(
     }
 
 
-    /* ========================================================
-     * EXECUTAR MODELO
-     * ======================================================== */
+    /* EXECUTAR MODELO */
 
     TfLiteStatus status =
         interpretador->Invoke();
@@ -436,9 +385,7 @@ bool ia_v1_predict(
     }
 
 
-    /* ========================================================
-     * LER SAIDA
-     * ======================================================== */
+    /*  LER SAIDA */
 
     float probabilidades[
         IA_V1_OUTPUTS
@@ -459,9 +406,7 @@ bool ia_v1_predict(
     }
 
 
-    /* ========================================================
-     * IDENTIFICAR MAIOR PROBABILIDADE
-     * ======================================================== */
+    /* IDENTIFICAR MAIOR PROBABILIDADE*/
 
     int classe = 0;
 
@@ -483,9 +428,7 @@ bool ia_v1_predict(
     }
 
 
-    /* ========================================================
-     * RESULTADO
-     * ======================================================== */
+    /* RESULTADO  */
 
     resultado->classe =
         static_cast<ia_v1_status_t>(
@@ -506,9 +449,7 @@ bool ia_v1_predict(
 }
 
 
-/* ============================================================
- * NOME DA CLASSE
- * ============================================================ */
+/* NOME DA CLASSE  */
 
 const char *ia_v1_status_string(
     ia_v1_status_t status

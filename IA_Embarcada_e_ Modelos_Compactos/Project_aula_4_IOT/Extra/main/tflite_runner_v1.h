@@ -23,13 +23,10 @@ typedef struct
     float probabilidade_critico;
 } ia_v1_resultado_t;
 
-/**
- * Inicializa o modelo de IA V1.
- */
+/** Inicializa o modelo de IA */
 bool ia_v1_init(void);
 
-/**
- * Executa uma inferência.
+/* Executa uma inferência.
  *
  * Entradas:
  *  - temperatura ambiente
@@ -37,8 +34,7 @@ bool ia_v1_init(void);
  *  - temperatura rack
  *  - umidade rack
  *  - gas ADC
- *  - energia (1 = presente / 0 = sem energia)
- */
+ *  - energia (1 = presente / 0 = sem energia) */
 bool ia_v1_predict(
     float temperatura_ambiente,
     float umidade_ambiente,
@@ -49,9 +45,7 @@ bool ia_v1_predict(
     ia_v1_resultado_t *resultado
 );
 
-/**
- * Retorna o nome da classe.
- */
+/* Retorna o nome da classe. */
 const char *ia_v1_status_string(
     ia_v1_status_t status
 );
