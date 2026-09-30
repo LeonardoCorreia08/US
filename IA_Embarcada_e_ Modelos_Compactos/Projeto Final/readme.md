@@ -1,23 +1,30 @@
-#  IA Embarcada e Modelos Compactos
+#  Projeto Final
 
-Este repositório é dedicado ao armazenamento de todos os projetos, atividades práticas e anotações desenvolvidas durante a disciplina de **IA Embarcada e Modelos Compactos**.
+## UC: IA Embarcada e Modelos Compactos
 
-O foco principal dos trabalhos aqui presentes é a otimização, quantização e o deploy de modelos de Machine Learning e Deep Learning em ambientes com recursos computacionais e de memória restritos (Edge AI / TinyML).
+### Desenvolva uma aplicação de IA Embarcada no qual os seguintes passos são
+realizados:
+• Coleta de dados de sensores;
+• Treinamento de um modelo com dataset público ou próprio coletado;
+• Conversão e compressão do modelo para embarcá-lo;
+• Desenvolvimento da pipeline de inferência no dispositivo desde a leitura dos dados
+até a inferência do modelo.
 
-##  Tecnologias e Ferramentas
+### Orientações gerais:
+• O hardware principal usado para a disciplina é o ESP32-S3, porém se houver interesse do
+aluno, pode ser desenvolvido modelos para outros hardwares, como por exemplo:
+Raspberry Pi Pico, Arduino, STM32;
+• Pode ser utilizado tanto o hardware físico ou simulado na plataforma Wokwi;
+• O projeto final não se limita a TinyML, pode ser desenvolvido aplicações para Edge Devices
+também como Raspberry Pi, Android / iOS Mobile, entre outros.
+• Nesse caso, o sensor pode ser uma câmera, microfone, acelerômetro, entre outras opções;
+• Ainda deve ser realizado um treinamento ou finetuning de modelo, compressão e deploy em
+dispositivo (real ou simulado);
 
-As principais linguagens, frameworks e hardwares explorados ao longo das atividades incluem:
-
-* **Hardware e Simulação:** ESP32 (ESP32-S3), Simulador Wokwi, Sensores (MPU6050, DHT11, MQ2)
-* **Ecossistema Embarcado:** C/C++, ESP-IDF
-* **Inteligência Artificial:** Python, TensorFlow Lite / TensorFlow Lite for Microcontrollers, PyTorch
-* **Ferramentas de Suporte:** Jupyter Notebooks, VsCode, Docker, Git
-
-##  Atividades 
-
-
-### [Project_aula_2_IOT](https://github.com/LeonardoCorreia08/US/tree/92cd073fba0901fc702ab0765d843128b60a4413/IA_Embarcada_e_%20Modelos_Compactos/Project_aula_2_IOT) Wokwi [aqui](https://wokwi.com/projects/475891325206053889)
-================================
-### [Project_aula_4_IOT](https://github.com/LeonardoCorreia08/US/tree/92cd073fba0901fc702ab0765d843128b60a4413/IA_Embarcada_e_%20Modelos_Compactos/Project_aula_4_IOT)
+### Exemplos de datasets públicos para o desenvolvimento do projeto:
+• Google Speech Commands Dataset;
+• Visual Wake Words (VWW) Dataset;
+• UCI Human Activity Recognition (HAR);
+• entre outros; 
 
 
