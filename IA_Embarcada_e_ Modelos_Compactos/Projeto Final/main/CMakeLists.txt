@@ -1,5 +1,7 @@
-idf_component_register(SRCS "hello_world_main.c" "tflite_runner_v1.cc" "model/hello_world_int8.cc"
-                       REQUIRES esp-tflite-micro
-                       PRIV_REQUIRES spi_flash
-                       INCLUDE_DIRS "."
-                       EMBED_FILES "model/hello_world_int8.tflite")
+# Pega todos os arquivos de código-fonte
+file(GLOB_RECURSE sources "*.c" "*.cpp" "*.cc")
+
+# Adiciona a pasta "model" nos diretórios de include (INCLUDE_DIRS)
+idf_component_register(SRCS ${sources}
+                       INCLUDE_DIRS "." "model"
+                       REQUIRES esp_adc esp_timer esp_driver_i2c)

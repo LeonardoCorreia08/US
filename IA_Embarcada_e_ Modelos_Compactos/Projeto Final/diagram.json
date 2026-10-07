@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "author": "Leonardo Correia",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-s3-devkitc-1",
+      "id": "esp",
+      "top": 9.42,
+      "left": -5.03,
+      "attrs": { "builder": "esp-idf" }
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled_coleta",
+      "top": -150.46,
+      "left": -124.57,
+      "attrs": { "i2cAddress": "0x3c" }
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled_resultado",
+      "top": -150.46,
+      "left": 86.63,
+      "attrs": { "i2cAddress": "0x3d" }
+    },
+    { "type": "wokwi-dht22", "id": "dht_temp_hum", "top": 96.3, "left": -130.2, "attrs": {} },
+    { "type": "wokwi-gas-sensor", "id": "gas1", "top": 2.7, "left": -156.2, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot_ph", "top": -87.7, "left": 9.4, "attrs": {} },
+    {
+      "type": "wokwi-slide-potentiometer",
+      "id": "pot_turbidez",
+      "top": 33.8,
+      "left": 114.2,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:3V3", "oled_coleta:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "oled_coleta:GND", "black", [ "v0" ] ],
+    [ "esp:8", "oled_coleta:SDA", "green", [ "v0" ] ],
+    [ "esp:9", "oled_coleta:SCL", "white", [ "v0" ] ],
+    [ "esp:3V3", "oled_resultado:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "oled_resultado:GND", "black", [ "v0" ] ],
+    [ "esp:8", "oled_resultado:SDA", "green", [ "v0" ] ],
+    [ "esp:9", "oled_resultado:SCL", "white", [ "v0" ] ],
+    [ "esp:3V3", "dht_temp_hum:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "dht_temp_hum:GND", "black", [ "v0" ] ],
+    [ "esp:4", "dht_temp_hum:SDA", "cyan", [ "v0" ] ],
+    [ "esp:5V", "gas1:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "gas1:GND", "black", [ "v0" ] ],
+    [ "esp:3", "gas1:A0", "purple", [ "v0" ] ],
+    [ "esp:3V3", "pot_ph:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "pot_ph:GND", "black", [ "v0" ] ],
+    [ "esp:1", "pot_ph:SIG", "yellow", [ "v0" ] ],
+    [ "esp:3V3", "pot_turbidez:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "pot_turbidez:GND", "black", [ "v0" ] ],
+    [ "esp:2", "pot_turbidez:SIG", "orange", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
